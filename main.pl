@@ -1,4 +1,4 @@
-:- dynamic(init/1).          /* Mark game dimulai */
+:- dynamic(init/1).
 :- dynamic(player/1).
 
 /* :- include('character.pl'). */
@@ -10,7 +10,7 @@
 /* :- include('store.pl'). */
 
 title :-
-    write('Gotta catch em all!'),nl,
+    write('Gatcha, Your Way To New Waifu'),nl,
     write('Available commands:'),nl,
     write('     start. -- start the game!'),nl,
     write('     help. -- show available commands'),nl,
@@ -22,19 +22,23 @@ title :-
     write('       - S = Store'),nl,
     write('       - Q = Quest'),nl,
     write('       - D = Dungeon'),nl,
+    write('       - T = Teleport'),nl,
     write('       - # = Wall'),nl,
+    !.
 
 start :- 
     init(_),
-    write('Game sudah dimulai'),!.
+    write('Game has already started!'),!.
 
 start :-
     \+init(_),
     title,
-    asserta(init(1)),
+    asserta(init(1)),    
+    initMap,
+    initPlayer,
+    randomizeWall,
     !.
 
 quit :-
     \+init(_),
-    write('Game belum dimulai kok diquit sih WKWK gimana aja'),!.
-
+    write('Game is not started yet'),!.
