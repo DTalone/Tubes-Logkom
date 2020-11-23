@@ -37,11 +37,11 @@ start :-
     !.
 
 help :- write('Perintah: '), nl,
-        write('    start.          -- mulai permainan'), nl,
-        write('    quit.           -- keluar permainan'), nl,
-        write('    help.           -- melihat perintah yang dapat digunakan'), nl,
-        write('    map.            -- melihat map'),nl,
-        write('    w. a. s. d.     -- gerak'), nl,
+        write('    start.              -- mulai permainan'), nl,
+        write('    quit.               -- keluar permainan'), nl,
+        write('    help.               -- melihat perintah yang dapat digunakan'), nl,
+        write('    map.                -- melihat map'),nl,
+        write('    w. a. s. d.         -- gerak'), nl,
         write('    saveGame(Filename). -- save game'), nl,
         write('    loadGame(Filename). -- load game'), nl.
 quit :-
