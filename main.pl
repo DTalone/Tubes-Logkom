@@ -1,4 +1,5 @@
 :- dynamic(running/1).
+:- dynamic(quest/1).
 :- dynamic(posisi/2).
 :- dynamic(gameOver/1).
 :- dynamic(gameWin/1).
@@ -40,8 +41,8 @@ help :- write('Perintah: '), nl,
         write('    quit.           -- keluar permainan'), nl,
         write('    help.           -- melihat perintah yang dapat digunakan'), nl,
         write('    w. a. s. d.     -- gerak'), nl,
-        write('    save(Filename). -- save game'), nl,
-        write('    load(Filename). -- load game'), nl.
+        write('    saveGame(Filename). -- save game'), nl,
+        write('    loadGame(Filename). -- load game'), nl.
 quit :-
     \+running(_),
     write('Permainan belum dimulai!'),!.
@@ -49,13 +50,40 @@ quit :-
 quit :- write('Terima kasih telah bermain'),nl,
         sleep(5),
         halt.
-save(_) :-
+saveGame(_) :-
 	\+running(_),
 	write('Perintah ini hanya bisa dipakai setelah pemainan dimulai.'), nl,
 	write('Gunakan perintah "start." untuk memulai permainan.'), nl, !.
 
-save(FileName) :-
+saveGame(FileName) :-
     nama(Username),
         tell(FileName),
             write('nama('), write(Username),write(').'),nl,
         told, !.
+loadGame(_) :-
+	running(_),
+	write('Kamu sudah memulai permainan.'), nl, !.
+
+loadGame(FileName):-
+	\+file_exists(FileName),
+	write('File tidak ditemukan'), nl, write('Silahkan tulis ulang nama file.'), nl, !.
+
+loadGame(FileName):-
+	open(FileName, read, Stream),
+        readFileLines(Stream,Lines),
+    close(Stream),
+    assertaLine(Lines),
+    asserta(init(1)), !.
+assertaLine([]) :- !.
+
+assertaLine([X|L]):-
+	asserta(X),
+	assertaLine(L), !.
+
+readFileLines(Stream,[]) :-
+    at_end_of_stream(Stream).
+
+readFileLines(Stream,[X|L]) :-
+    \+ at_end_of_stream(Stream),
+    read(Stream,X),
+    readFileLines(Stream,L).
