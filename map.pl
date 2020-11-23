@@ -1,7 +1,5 @@
 :- dynamic(lebar/1).
 :- dynamic(panjang/1).
-:- dynamic(playerX/1).
-:- dynamic(playerY/1).
 :- dynamic(wall/20).
 :- dynamic(dungeon/2).
 
@@ -17,12 +15,10 @@ initMap:-
     asserta(dungeon(DX,DY)).
 
 initPlayer :-
-    asserta(playerX(1)),
-    asserta(playerY(1)).
+    asserta(posisi(1,1)).
 
 isPlayer(X,Y) :-
-    playerX(A),
-    playerY(B),
+    posisi(A,B),
     X =:= A,
     Y =:= B.
 
@@ -192,5 +188,5 @@ printMap(X,Y) :-
     printMap(NextX,Y).
 
 map :- 
-    init(_),
+    running(_),
     printMap(0,0),!.

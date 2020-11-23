@@ -15,7 +15,7 @@
 
 start :-
     running(_),
-    write('Game has already started!'),!.
+    write('Permainan sudah dimulai!'),!.
 
 start :-
     \+running(_),
