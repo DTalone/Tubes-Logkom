@@ -1,5 +1,4 @@
 :- dynamic(running/1).
-:- dynamic(posisi/2).
 :- dynamic(gameOver/1).
 :- dynamic(gameWin/1).
 :- dynamic(nama/1).
@@ -14,7 +13,7 @@
 
 start :-
     running(_),
-    write('Game has already started!'),!.
+    write('Permainan sudah dimulai!'),!.
 
 start :-
     \+running(_),
@@ -35,13 +34,18 @@ start :-
     randomizeWall,
     !.
 
-help :- write('Perintah: '), nl,
-        write('    start.          -- mulai permainan'), nl,
-        write('    quit.           -- keluar permainan'), nl,
-        write('    help.           -- melihat perintah yang dapat digunakan'), nl,
-        write('    w. a. s. d.     -- gerak'), nl,
-        write('    save(Filename). -- save game'), nl,
-        write('    load(Filename). -- load game'), nl.
+help :- 
+    write('  ____________________________________________________________'),nl,
+    write(' |____________________________________________________________|'),nl,
+    write(' | Perintah:                                                  |'), nl,
+    write(' |   start.          -- mulai permainan                       |'), nl,
+    write(' |   quit.           -- keluar permainan                      |'), nl,
+    write(' |   help.           -- melihat perintah yang dapat digunakan |'), nl,
+    write(' |   w. a. s. d.     -- gerak                                 |'), nl,
+    write(' |   save(Filename). -- save game                             |'), nl,
+    write(' |   load(Filename). -- load game                             |'), nl,
+    write(' |____________________________________________________________|'), nl.
+
 quit :-
     \+running(_),
     write('Permainan belum dimulai!'),!.
