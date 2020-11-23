@@ -9,36 +9,42 @@
 /* :- include('battle.pl'). */
 /* :- include('store.pl'). */
 
-title :-
-    write('Gatcha, Your Way To New Waifu'),nl,
-    write('Available commands:'),nl,
-    write('     start. -- start the game!'),nl,
-    write('     help. -- show available commands'),nl,
-    write('     quit. -- quit the game'),nl,
-    write('     w. a. s. d. -- move'),nl,
-    write('     map. -- look at the map'),nl,
-    write('     Legends:'),nl,
-    write('       - P = Player'),nl,
-    write('       - S = Store'),nl,
-    write('       - Q = Quest'),nl,
-    write('       - D = Dungeon'),nl,
-    write('       - T = Teleport'),nl,
-    write('       - # = Wall'),nl,
-    !.
+% title :-
+%     write('Gatcha, Your Way To New Waifu'),nl,
+%     write('Available commands:'),nl,
+%     write('     start. -- start the game!'),nl,
+%     write('     help. -- show available commands'),nl,
+%     write('     quit. -- quit the game'),nl,
+%     write('     w. a. s. d. -- move'),nl,
+%     write('     map. -- look at the map'),nl,
+%     write('     Legends:'),nl,
+%     write('       - P = Player'),nl,
+%     write('       - S = Store'),nl,
+%     write('       - Q = Quest'),nl,
+%     write('       - D = Dungeon'),nl,
+%     write('       - T = Teleport'),nl,
+%     write('       - # = Wall'),nl,
+%     !.
 
-start :- 
+start :-
     init(_),
     write('Game has already started!'),!.
 
 start :-
     \+init(_),
     title,
-    asserta(init(1)),    
+    asserta(init(1)),
     initMap,
     initPlayer,
     randomizeWall,
     !.
-
+help :-running(_),
+        write('Perintah: '), nl,
+        write('    start. -- memulai permainan'), nl,
+        write('    help. -- melihat perintah yang dapat digunakan'), nl,
+        write('    n. s. e. w. -- gerak'), nl,
+        write('    save(Filename). -- save game'), nl,
+        write('    load(Filename). -- load game'), nl.
 quit :-
     \+init(_),
     write('Game is not started yet'),!.
