@@ -1,5 +1,7 @@
 /* File : store.pl */
 
+:- dynamic(store/1).
+
 price(gacha,1000).
 price(health_potion_s,200).
 price(health_potion_m,500).
@@ -8,61 +10,57 @@ price(enhancer_attack,750).
 price(enhancer_defense,750).
 price(freeze_potion,1000).
 
+random_equip(1,crossbow).
+random_equip(2,longbow).
+random_equip(3,haedonggum).
+random_equip(4,flamberge).
+random_equip(5,magic_staff).
+random_equip(6,lighter_armor).
+random_equip(7,heavy_armor).
+random_equip(8,magic_robe).
+
 store :-
-	isStore(true),
+	store(_),
+	/*isStore(true),*/
+	write('Kamu sudah berada di store.'),
+	!.
+
+store :-
+	\+store(_),
+	/*isStore(true),*/
 	write('                                '),nl,
     	write('                                '),nl,
-    	write('What do you want to buy?'),nl,
+    	write('Apa yang ingin Anda beli?'),nl,
     	write('1. Gacha (1000 gold)'),nl,
     	write('2. Health Potion S (200 gold)'),nl,
     	write('3. Health Potion M (500 gold)'),nl,
     	write('4. Health Potion L (1000 gold) '),nl,
-    	write('5. Enhancer Attack (750 gold)'),nl,
+    	write('5. Enhancer Attack (750 gold)'),nl,	
     	write('6. Enhancer Defense (750 gold)'),nl,
-    	write('7. Freeze Potion (1000 gold)'),nl.
-
-store :-
-	isStore(false), !,
-	write('Sorry, you are too far from the store.'),nl,
-	write('Please go to the store.'),nl.
-
-isEnough(Y) :-
-	X is Y,
-	price(X,P),
-	P<=money.
+    	write('7. Freeze Potion (1000 gold)'),nl,
+	asserta(store(1)),
+	!.
 
 gacha :- 
-	isEnough(gacha),
-	/*random*/
-	
-health_potion_s :- 
-	isEnough(health_potion_s),
-	addInventory(health_potion_s).	
+	store(_),
+	random(1,8,R),
+	random_equip(R,Equip),
+	write('Kamu mendapatkan equipment : '),
+	write(Equip),nl,
+	!.
 
-health_potion_m :-
-	isEnough(health_potion_m),
-	addInventory(health_potion_m).
-
-health_potion_l :-
-	isEnough(health_potion_l),
-	addInventory(health_potion_l).
-
-enhancer_attack :-
-	isEnough(enhancer_attack),
-	addInventory(enhancer_attack).
-
-enhancer_defense :-
-	isEnough(enhancer_defense),
-	addInventory(enhancer_defense).
-
-freeze_potion :-
-	isEnough(freeze_potion),
-	addInventory(freeze_potion).
+gacha :- 
+	\+store(_),
+	write('Pemain tidak berada di dalam store.'),nl,
+	!.	
 
 exitStore :-
-	isStore(false),
-	write('Player not in the store.'),nl.
+	\+store(_),
+	write('Pemain tidak berada di dalam store.'),nl,
+	!.
 
 exitStore :-
-	isStore(true),
-	write('Thanks for coming.'),nl.
+	store(_),
+	write('Terimakasih atas kehadirannya.'),nl,
+	retract(store(1)),
+	!.
