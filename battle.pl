@@ -1,0 +1,1 @@
+:- dynamic(battle/1).
