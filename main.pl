@@ -4,12 +4,13 @@
 :- dynamic(gameOver/0).
 :- dynamic(gameWin/0).
 :- dynamic(nama/1).
+:- dynamic(gold/1).
 
 :- include('character.pl').
 :- include('map.pl').
 :- include('exploration.pl').
 :- include('items.pl').
-/* :- include('enemy.pl'). */
+:- include('enemy.pl').
 /* :- include('quest.pl'). */
 :- include('battle.pl').
 :- include('store.pl').
@@ -33,8 +34,9 @@ start :-
     asserta(nama(Username)),
     write('Halo '), write(Username), nl,
     asserta(running(1)),
-    initMap,
     initChar,
+    initEnemy,
+    initMap,
     randomizeWall,
     !.
 
