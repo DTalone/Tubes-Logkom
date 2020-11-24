@@ -35,7 +35,6 @@ start :-
     asserta(running(1)),
     initMap,
     initChar,
-    randomizeWall,
     !.
 
 help :- write('Perintah: '), nl,
