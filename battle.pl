@@ -6,15 +6,13 @@ battle(A) :- enemy(A,B,C,D,E),
           asserta(round(0)),
           adjusmentEnemy(A),
           asserta(currEnemy(A,B,C,D,E,B)),
-          repeat,
+          fight.
+fight :-  repeat,
           round(Round), Roundnew is Round + 1,
           retract(round(Round)), asserta(round(Roundnew)),
           turnUser,
-          endCondition,
-          printStat,
-          turnEnemy,
-          printStat,
-          endCondition.
+          currEnemy(_,W,_,_,_,_),
+          (endCondition(W,2) -> !;turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,!;fight)).
 
 turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             write('- attack.'),nl,
@@ -40,9 +38,9 @@ attack :- character(_,_,X,_,_,_,_,_),
           retract(currEnemy(A,B,C,D,E,F)),
           asserta(currEnemy(A,Bnew,C,D,E,F)),
           write('serangan berhasil'),nl.
-          
-endCondition:-  character(_,X,_,_,_,_,_,_), X < 0, write('Kamu Kalah'),nl,!.
-endCondition:- currEnemy(_,W,_,_,_,_), W < 0 , write('Kamu menang'),nl,!.
+
+endCondition(X,Y):- Y = 1,   X < 0, write('Kamu Kalah'),nl,!.
+endCondition(X,Y):- Y = 2,  X < 0 , write('Kamu menang'),nl,!.
 %
 % attack :-
 %
