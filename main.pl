@@ -6,11 +6,12 @@
 :- dynamic(nama/1).
 /* :- include('character.pl'). */
 :- include('map.pl').
+:- include('exploration.pl').
 :- include('items.pl').
 /* :- include('enemy.pl'). */
 /* :- include('quest.pl'). */
 /* :- include('battle.pl'). */
-% :- include('store.pl').
+:- include('store.pl').
 
 
 start :-
@@ -74,7 +75,7 @@ loadGame(FileName):-
         readFileLines(Stream,Lines),
     close(Stream),
     assertaLine(Lines),
-    asserta(init(1)), !.
+    asserta(running(1)), !.
 assertaLine([]) :- !.
 
 assertaLine([X|L]):-
