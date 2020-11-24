@@ -5,7 +5,7 @@
 
 w :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isWall(A,B-1,A,B-1),
     write('Nabrak'),nl,
@@ -13,7 +13,7 @@ w :-
 
 w :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isBorder(A,B-1),
     write('Nabrak'),nl,
@@ -21,7 +21,7 @@ w :-
 
 w :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isStore(A,B-1),
     retract(posisi(A,B)),
@@ -32,7 +32,7 @@ w :-
 
 w :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isQuest(A,B-1),
     retract(posisi(A,B)),
@@ -43,7 +43,7 @@ w :-
 
 w :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isDungeon(A,B-1),
     retract(posisi(A,B)),
@@ -54,7 +54,7 @@ w :-
 
 w :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isTeleport(A,B-1),
     retract(posisi(A,B)),
@@ -65,7 +65,7 @@ w :-
 
 w :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
@@ -74,7 +74,7 @@ w :-
 
 a :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isBorder(A-1,B),
     write('Nabrak'),
@@ -82,7 +82,7 @@ a :-
 
 a :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isWall(A-1,B,A-1,B),
     write('Nabrak'),nl,
@@ -90,7 +90,7 @@ a :-
 
 a :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isStore(A-1,B),
     retract(posisi(A,B)),
@@ -101,7 +101,7 @@ a :-
 
 a :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isQuest(A-1,B),
     retract(posisi(A,B)),
@@ -112,7 +112,7 @@ a :-
 
 a :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isDungeon(A-1,B),
     retract(posisi(A,B)),
@@ -123,7 +123,7 @@ a :-
 
 a :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isTeleport(A-1,B),
     retract(posisi(A,B)),
@@ -134,7 +134,7 @@ a :-
 
 a :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
@@ -143,7 +143,7 @@ a :-
 
 s :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isBorder(A,B+1),
     write('Nabrak'),
@@ -151,7 +151,7 @@ s :-
 
 s :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isWall(A,B+1,A,B+1),
     write('Nabrak'),nl,
@@ -159,7 +159,7 @@ s :-
 
 s :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isStore(A,B+1),
     retract(posisi(A,B)),
@@ -170,7 +170,7 @@ s :-
 
 s :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isQuest(A,B+1),
     retract(posisi(A,B)),
@@ -181,7 +181,7 @@ s :-
 
 s :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isDungeon(A,B+1),
     retract(posisi(A,B)),
@@ -192,7 +192,7 @@ s :-
 
 s :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isTeleport(A,B+1),
     retract(posisi(A,B)),
@@ -203,7 +203,7 @@ s :-
 
 s :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
@@ -212,7 +212,7 @@ s :-
 
 d :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isBorder(A+1,B),
     write('Nabrak'),
@@ -220,7 +220,7 @@ d :-
 
 d :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isWall(A+1,B,A+1,B),
     write('Nabrak'),nl,
@@ -228,7 +228,7 @@ d :-
 
 d :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isStore(A+1,B),
     retract(posisi(A,B)),
@@ -239,7 +239,7 @@ d :-
 
 d :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isQuest(A+1,B),
     retract(posisi(A,B)),
@@ -250,7 +250,7 @@ d :-
 
 d :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isDungeon(A+1,B),
     retract(posisi(A,B)),
@@ -261,7 +261,7 @@ d :-
 
 d :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     isTeleport(A+1,B),
     retract(posisi(A,B)),
@@ -272,7 +272,7 @@ d :-
 
 d :-
     running(_),
-    \+battle(_),
+    \+round(_),
     posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
@@ -281,10 +281,10 @@ d :-
 
 randomEncounter :-
     running(_),
-    \+battle(_),
+    \+round(_),
     random(1,100,Encounter),
     (
-        Encounter < 25 -> 
+        Encounter < 15 -> 
         randomEnemy
         ; !
     ).
@@ -293,17 +293,16 @@ randomEnemy :-
     random(1,6,EnemyID),
     (
         EnemyID =:= 1 -> 
-        /* asserta(enemy(Slime)) */
+        battle(slime)
     ;   EnemyID =:= 2 ->
-        /* asserta(enemy(Goblin)) */
+        battle(goblin)
     ;   EnemyID =:= 3 ->
-        /* asserta(enemy(Wolf)) */
+        battle(wolf)
     ;   EnemyID =:= 4 ->
-        /* asserta(enemy(Golem)) */
+        battle(golem)
     ;   EnemyID =:= 5 ->
-        /* asserta(enemy(Wizard)) */
+        battle(wizard)
     ).
-    /* asserta(battle(1)). */
 
 teleport :-
     running(_),
