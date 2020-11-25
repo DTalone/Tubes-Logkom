@@ -70,7 +70,8 @@ w :-
     cekArea(A,B),
     retract(posisi(A,B)),
     asserta(posisi(A,B-1)),
-    randomEncounter.
+    randomEncounter,
+    !.
 
 a :-
     running(_),
@@ -139,7 +140,8 @@ a :-
     cekArea(A,B),
     retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
-    randomEncounter.
+    randomEncounter,
+    !.
 
 s :-
     running(_),
@@ -208,7 +210,8 @@ s :-
     cekArea(A,B),
     retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
-    randomEncounter.
+    randomEncounter,
+    !.
 
 d :-
     running(_),
@@ -277,7 +280,8 @@ d :-
     cekArea(A,B),
     retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
-    randomEncounter.
+    randomEncounter,
+    !.
 
 randomEncounter :-
     running(_),
@@ -285,30 +289,43 @@ randomEncounter :-
     random(1,100,Encounter),
     (
         Encounter < 15 ->
-        randomEnemy
-        ; !
+        posisi(_,B),
+        randomEnemy(_,B)
+    ;   write('Anda tidak bertemu musuh')
     ).
 
-randomEnemy :-
-    random(1,6,EnemyID),
+randomEnemy(_,B) :-
+    (
+        B < 5 ->
+        random(1,3,EnemyID) % Di 1 <= Y <=4 awal bisa lawan Slime / Goblin
+    ;   B < 8 ->
+        random(3,5,EnemyID) % Di 5 <= Y <=7 awal bisa lawan Wolf / Golem
+    ;   EnemyID is 5 % Di Y > 7 awal bisa lawan Wizard
+    ),
+
     (
         EnemyID =:= 1 ->
+        write('Anda menemukan Slime!'),nl,
         battle(slime),
         (victory -> quest(A,B,C,D,E), Anew is A + 1 , retract(quest(A,B,C,D,E)), asserta(quest(Anew,B,C,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ;   EnemyID =:= 2 ->
+        write('Anda menemukan Goblin!'),nl,
         battle(goblin),
         (victory -> quest(A,B,C,D,E), Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ;   EnemyID =:= 3 ->
+        write('Anda menemukan Wolf!'),nl,
         battle(wolf),
         (victory -> quest(A,B,C,D,E), Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ;   EnemyID =:= 4 ->
+        write('Anda menemukan Golem!'),nl,
         battle(golem),
         (victory -> quest(A,B,C,D,E), Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ;   EnemyID =:= 5 ->
+        write('Anda menemukan Wizard!'),nl,
         battle(wizard),
         (victory -> quest(A,B,C,D,E), Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ).
-
+    
 teleport :-
     running(_),
     \+teleport(_),
