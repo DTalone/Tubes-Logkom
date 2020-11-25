@@ -39,6 +39,9 @@ attack :- character(_,_,X,_,_,_,_,_),
           asserta(currEnemy(A,Bnew,C,D,E,F)),
           write('serangan berhasil'),nl.
 
+specialAttack :- round(X), write(X), write(' '),Z is X mod 3, (Z =:= 0-> write('mematikan'),nl;
+round(Round), Roundnew is Round - 1,retract(round(Round)), asserta(round(Roundnew)),fail).
+
 endCondition(X,Y):- Y = 1,   X < 0, write('Kamu Kalah'),nl,!.
 endCondition(X,Y):- Y = 2,  X < 0 , write('Kamu menang'),nl,!.
 %
@@ -47,8 +50,7 @@ endCondition(X,Y):- Y = 2,  X < 0 , write('Kamu menang'),nl,!.
 %
 % attack :-
 %
-% specialAttack :-
-%
+
 % specialAttack :-
 %
 %
