@@ -44,9 +44,9 @@ attack :- character(_,_,X,_,_,_,_,_),
           write('serangan berhasil'),nl.
 attack :- character(_,_,X,_,_,_,_,_),
           currEnemy(A,B,C,D,E,F),
-          Bnew is B - X + D, Bnew > B, Bnew is B - X,
+          Bnew is B - X + D, Bnew > B, Bnew1 is B - X,
           retract(currEnemy(A,B,C,D,E,F)),
-          asserta(currEnemy(A,Bnew,C,D,E,F)),
+          asserta(currEnemy(A,Bnew1,C,D,E,F)),
           write('serangan berhasil'),nl.
 specialAttack :- round(X),Z is X mod 3, (Z =:= 0-> write('mematikan'),currEnemy(A,B,C,D,E,F),
                   Bnew is B - 2 * X,retract(currEnemy(A,B,C,D,E,F)),asserta(currEnemy(A,Bnew,C,D,E,F)),nl;
