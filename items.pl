@@ -74,35 +74,34 @@ use(Nama) :-
 	!,fail.
 
 use(Nama) :-
-	item(ID,Pengguna,Nama,HP,Att,Def),
-	character(Jenis,Health,Attack,Defense,_,_,_),	
+	item(_,Pengguna,Nama,_,_,_),
+	character(Jenis,_,_,_,_,_,_,_),
 	Jenis \== Pengguna,
 	write('Pemain tidak dapat menggunakan item ini.'),
 	!.
 
 use(Nama) :-
-	item(ID,Pengguna,Nama,HP,Att,Def),
-	character(Jenis,Health,Attack,Defense,E,F,G),	
+	item(_,Pengguna,Nama,HP,Att,Def),
+	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	Jenis=Pengguna,
 	Hnew is Health + HP * Health,
 	Anew is Attack + Att * Attack,
 	Dnew is Defense + Def * Defense,
 	Hnew > Hmax,
 	retract(inventory(_,_,Nama,_,_,_)),
-	retract(character(Jenis,Health,Attack,Defense,E,F,G)),
-	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G)),
+	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
+	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
 	!.
 
 use(Nama) :-
-	item(ID,Pengguna,Nama,HP,Att,Def),
-	character(Jenis,Health,Attack,Defense,E,F,G),	
+	item(_,Pengguna,Nama,HP,Att,Def),
+	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	Jenis=Pengguna,
 	Hnew is Health + HP * Health,
 	Anew is Attack + Att * Attack,
 	Dnew is Defense + Def * Defense,
 	Hnew =< Hmax,
 	retract(inventory(_,_,Nama,_,_,_)),
-	retract(character(Jenis,Health,Attack,Defense,E,F,G)),
-	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G)),
+	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
+	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
 	!.
-	
