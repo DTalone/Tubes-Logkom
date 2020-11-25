@@ -280,7 +280,7 @@ d :-
     cekArea(A,B),
     retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
-    randomEncounter,
+    (randomEncounter -> write(''); write('Anda berpindah 1 kotak.'),nl),
     !.
 
 randomEncounter :-
@@ -291,7 +291,7 @@ randomEncounter :-
         Encounter < 15 ->
         posisi(_,B),
         randomEnemy(_,B)
-    ;   write('Anda tidak bertemu musuh')
+
     ).
 
 randomEnemy(_,B) :-
@@ -307,25 +307,25 @@ randomEnemy(_,B) :-
         EnemyID =:= 1 ->
         write('Anda menemukan Slime!'),nl,
         battle(slime),
-        (victory -> quest(A,B,C,D,E), Anew is A + 1 , retract(quest(A,B,C,D,E)), asserta(quest(Anew,B,C,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
+        (victory -> quest(A,B,C,D,E), Anew is A + 1 , retract(quest(A,B,C,D,E)), asserta(quest(Anew,B,C,D,E)), retract(victory), cekQuest)
     ;   EnemyID =:= 2 ->
         write('Anda menemukan Goblin!'),nl,
         battle(goblin),
-        (victory -> quest(A,B,C,D,E), Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
+        (victory -> quest(A,B,C,D,E), Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 3 ->
         write('Anda menemukan Wolf!'),nl,
         battle(wolf),
-        (victory -> quest(A,B,C,D,E), Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
+        (victory -> quest(A,B,C,D,E), Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 4 ->
         write('Anda menemukan Golem!'),nl,
         battle(golem),
-        (victory -> quest(A,B,C,D,E), Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
+        (victory -> quest(A,B,C,D,E), Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 5 ->
         write('Anda menemukan Wizard!'),nl,
         battle(wizard),
-        (victory -> quest(A,B,C,D,E), Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
+        (victory -> quest(A,B,C,D,E), Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest)
     ).
-    
+
 teleport :-
     running(_),
     \+teleport(_),

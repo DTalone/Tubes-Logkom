@@ -6,6 +6,8 @@
 :- dynamic(nama/1).
 :- dynamic(gold/1).
 :- dynamic(chapter/1).
+:- dynamic(daily/1).
+:- dynamic(victory/0).
 
 :- include('character.pl').
 :- include('map.pl').
