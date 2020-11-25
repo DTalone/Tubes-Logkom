@@ -8,6 +8,9 @@
 :- dynamic(chapter/1).
 :- dynamic(daily/1).
 :- dynamic(victory/0).
+:- dynamic(quest/5).
+
+quest(0,0,0,0,0).
 
 :- include('character.pl').
 :- include('map.pl').
@@ -36,8 +39,6 @@ start :-
     write('- loadGame.'),nl.
 
 newGame:- write('Siapakah nama kamu?'),nl,
-          asserta(quest(0,0,0,0,0)),
-          asserta(chapter(0)),
           read(Username),
           asserta(nama(Username)),
           write('Halo '), write(Username), nl,

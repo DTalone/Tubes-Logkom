@@ -8,12 +8,13 @@ battle(A) :- adjusmentEnemy(A),
           asserta(currEnemy(A,B,C,D,E,B)),
           printStat,
           fight,
-          retractall(currEnemy(_,_,_,_,_)),
+          retractall(currEnemy(_,_,_,_,_,_)),
           retractall(round(_)),
           character(S,T,U,V,W,X,Y,Z),
-          Xnew is X + E * 20,
+          Xnew is X + E * 300,
           retract(character(S,T,U,V,W,X,Y,Z)),
-          asserta(character(S,T,U,V,W,Xnew,Y,Z)).
+          asserta(character(S,T,U,V,W,Xnew,Y,Z)),
+          levelUp.
 
 bossMode:- enemy(A,B,C,D,E),
           asserta(round(0)),
@@ -49,6 +50,7 @@ printStat :- character(A,B,_,_,_,_,_,H),currEnemy(I,J,_,_,_,K), round(Round), B 
           write('Giliran ke-'),write(Round),nl,
           write('Job      : '), write(A),write('           '),write('Type       : '), write(I),nl,
           write('HP       : '), write('0'),write('/'),write(H),write('          '),write('HP       : '), write(J),write('/'),write(K),nl,!.
+
 printStat :- character(A,B,_,_,_,_,_,H),currEnemy(I,J,_,_,_,K), round(Round), J < 0,
           write('Giliran ke-'),write(Round),nl,
           write('Job      : '), write(A),write('           '),write('Type       : '), write(I),nl,
