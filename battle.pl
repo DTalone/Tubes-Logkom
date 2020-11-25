@@ -7,6 +7,7 @@ battle(A) :- enemy(A,B,C,D,E),
           adjusmentEnemy(A),
           asserta(currEnemy(A,B,C,D,E,B)),
           fight.
+
 fight :-  repeat,
           round(Round), Roundnew is Round + 1,
           retract(round(Round)), asserta(round(Roundnew)),
@@ -39,11 +40,12 @@ attack :- character(_,_,X,_,_,_,_,_),
           asserta(currEnemy(A,Bnew,C,D,E,F)),
           write('serangan berhasil'),nl.
 
-specialAttack :- round(X), write(X), write(' '),Z is X mod 3, (Z =:= 0-> write('mematikan'),nl;
-round(Round), Roundnew is Round - 1,retract(round(Round)), asserta(round(Roundnew)),fail).
+specialAttack :- round(X),Z is X mod 3, (Z =:= 0-> write('mematikan'),currEnemy(A,B,C,D,E,F),
+                  Bnew is B - 2 * X,retract(currEnemy(A,B,C,D,E,F)),asserta(currEnemy(A,Bnew,C,D,E,F)),nl;
+                  round(Round), Roundnew is Round - 1,retract(round(Round)), asserta(round(Roundnew)),fail).
 
-endCondition(X,Y):- Y = 1,   X < 0, write('Kamu Kalah'),nl,!.
-endCondition(X,Y):- Y = 2,  X < 0 , write('Kamu menang'),nl,!.
+endCondition(X,Y):- Y = 1,   X < 0, write('Kamu Kalah'),nl,retractall(round(_)),!.
+endCondition(X,Y):- Y = 2,  X < 0 , write('Kamu menang'),nl,retractall(round(_)),!.
 %
 % attack :-
 %
