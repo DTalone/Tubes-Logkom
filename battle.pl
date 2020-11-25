@@ -2,13 +2,26 @@
 :- dynamic(kabur/0).  %tanda jika berhasil kabur
 :- dynamic(currEnemy/6). %menyimpan enemy sekarang
 :- dynamic(victory/0).
-battle(A) :- enemy(A,B,C,D,E),
+battle(A) :- adjusmentEnemy(A),
+          enemy(A,B,C,D,E),
+          asserta(round(0)),
+          asserta(currEnemy(A,B,C,D,E,B)),
+          fight,
+          retractall(currEnemy(_,_,_,_,_)),
+          retractall(round(_)),
+          character(S,T,U,V,W,X,Y,Z),
+          Xnew is X + E * 20,
+          retract(character(S,T,U,V,W,X,Y,Z)),
+          asserta(character(S,T,U,V,W,Xnew,Y,Z)).
+
+bossMode:- enemy(A,B,C,D,E),
           asserta(round(0)),
           adjusmentEnemy(A),
           asserta(currEnemy(A,B,C,D,E,B)),
           fight,
           retractall(currEnemy(_,_,_,_,_)),
-          retractall(round(_)).
+          retractall(round(_)),
+          (victory -> write('Selamat kamu memenangkan game ini!'),nl;write('Game Over'),nl).
 
 fight :-  repeat,
           round(Round), Roundnew is Round + 1,

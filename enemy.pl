@@ -10,7 +10,8 @@ initEnemy :-asserta(enemy(slime, 250,70,10,1)),
             asserta(enemy(goblin, 150,100,50,1)),
             asserta(enemy(wolf, 300,150,70,1)),
             asserta(enemy(golem, 400,90,150,1)),
-            asserta(enemy(wizard, 450,200,100,1)).
+            asserta(enemy(wizard, 450,200,100,1)),
+            asserta(enemy(rajagledek, 5000,1000,500,100)).
 statusEnemy :- enemy(A,B,C,D,E),
           write('Type     : '), write(A),nl,
           write('HP       : '), write(B),nl,

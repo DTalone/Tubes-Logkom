@@ -1,17 +1,18 @@
 :- dynamic(running/1).
-:- dynamic(quest/1).
+:- dynamic(onQuest/1).
 :- dynamic(posisi/2).
 :- dynamic(gameOver/0).
 :- dynamic(gameWin/0).
 :- dynamic(nama/1).
 :- dynamic(gold/1).
+:- dynamic(chapter/1).
 
 :- include('character.pl').
 :- include('map.pl').
 :- include('exploration.pl').
 :- include('items.pl').
 :- include('enemy.pl').
-/* :- include('quest.pl'). */
+:- include('quest.pl').
 :- include('battle.pl').
 :- include('store.pl').
 
@@ -29,17 +30,22 @@ start :-
     write( '_|_|_|_|    _|_|      _|_|_|  _|    _|        _|_|_|    _|_|    _|      _|'),nl,
     nl,
     write('Selamat datang pemuda pencari tujuan hidup'),nl,
-    write('Siapakah nama kamu?'),nl,
-    asserta(quest(0,0,0,0,0)),
-    read(Username),
-    asserta(nama(Username)),
-    write('Halo '), write(Username), nl,
-    asserta(running(1)),
-    initChar,
-    initEnemy,
-    initMap,
-    randomizeWall,
-    !.
+    write('- newGame.'),nl,
+    write('- loadGame.'),nl.
+
+newGame:- write('Siapakah nama kamu?'),nl,
+          asserta(quest(0,0,0,0,0)),
+          asserta(chapter(0)),
+          read(Username),
+          asserta(nama(Username)),
+          write('Halo '), write(Username), nl,
+          asserta(running(1)),
+          initChar,
+          initEnemy,
+          initMap,
+          randomizeWall,
+          story0,
+          !.
 
 help :- write('Perintah: '), nl,
         write('    start.              : mulai permainan'), nl,
