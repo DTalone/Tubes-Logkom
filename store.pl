@@ -260,7 +260,7 @@ freeze_potion :-
 	!.
 
 exitStore :-
-	\+store(_),
+	\+inStore(_),
 	write('                                '),nl,
     	write('                                '),nl,
 	write('Pemain tidak berada di dalam store.'),nl,
