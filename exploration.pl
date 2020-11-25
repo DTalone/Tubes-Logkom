@@ -26,7 +26,7 @@ w :-
     isStore(A,B-1),
     retract(posisi(A,B)),
     asserta(posisi(A,B-1)),
-    asserta(store(1)),
+    asserta(inStore(1)),
     write('Anda berada di Store'),
     !.
 
@@ -95,7 +95,7 @@ a :-
     isStore(A-1,B),
     retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
-    asserta(store(1)),
+    asserta(inStore(1)),
     write('Anda berada di Store'),
     !.
 
@@ -164,7 +164,7 @@ s :-
     isStore(A,B+1),
     retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
-    asserta(store(1)),
+    asserta(inStore(1)),
     write('Anda berada di Store'),
     !.
 
@@ -233,7 +233,7 @@ d :-
     isStore(A+1,B),
     retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
-    asserta(store(1)),
+    asserta(inStore(1)),
     write('Anda berada di Store'),
     !.
 

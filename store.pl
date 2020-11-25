@@ -1,9 +1,8 @@
 /* File : store.pl */
 
-:- include('items.pl').
-
 :-dynamic(store/1).
 :-dynamic(gold/1).
+:-dynamic(inStore/1).
 
 gold(0).
 
@@ -26,15 +25,20 @@ random_equip(8,magic_robe).
 	
 store :-
 	store(_),
-	/*isStore(true),*/
 	write('                                '),nl,
     	write('                                '),nl,
 	write('Kamu sudah berada di store.'),
 	!.
 
 store :-
+	\+inStore(_),
+	write('                                '),nl,
+    	write('                                '),nl,
+	write('Kamu masih terlalu jauh dari store.'),
+	!.
+
+store :-
 	\+store(_),
-	/*isStore(true),*/
 	write('                                '),nl,
     	write('                                '),nl,
     	write('Apa yang ingin Anda beli?'),nl,
