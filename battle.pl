@@ -1,7 +1,7 @@
 :- dynamic(round/1). %tanda apabila sedang battle
 :- dynamic(kabur/0).  %tanda jika berhasil kabur
 :- dynamic(currEnemy/6). %menyimpan enemy sekarang
-
+:- dynamic(victory/0).
 battle(A) :- enemy(A,B,C,D,E),
           asserta(round(0)),
           adjusmentEnemy(A),
@@ -12,7 +12,7 @@ fight :-  repeat,
           retract(round(Round)), asserta(round(Roundnew)),
           turnUser,
           currEnemy(_,W,_,_,_,_),
-          (endCondition(W,2) -> !;turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,!;fight)).
+          (endCondition(W,2) -> asserta(victory),!;turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,!;fight)).
 
 turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             write('- attack.'),nl,
@@ -63,13 +63,5 @@ endCondition(X,Y):- Y = 2,  X < 0 , write('Kamu menang'),nl,!.
 % usePotions :-
 %
 
-run :-
-    gameOver, lose, !.
-run :-
-    \+ gameOver,
-    \+ kabur,
-    write('Run tidak berhasil!'), nl,
-    write('Semangat!'), nl, !.
-
 run :- random(1,100,X),
-    ( X < 50 -> write(X); write('Tidak berhasil'),retract(kabur)), !.
+    ( X < 50 -> !; fail).

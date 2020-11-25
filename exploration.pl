@@ -284,7 +284,7 @@ randomEncounter :-
     \+round(_),
     random(1,100,Encounter),
     (
-        Encounter < 15 -> 
+        Encounter < 15 ->
         randomEnemy
         ; !
     ).
@@ -292,16 +292,21 @@ randomEncounter :-
 randomEnemy :-
     random(1,6,EnemyID),
     (
-        EnemyID =:= 1 -> 
-        battle(slime)
+        EnemyID =:= 1 ->
+        battle(slime),
+        (victory -> quest(A,B,C,D,E), Anew is A + 1 , retract(quest(A,B,C,D,E)), asserta(quest(Anew,B,C,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ;   EnemyID =:= 2 ->
-        battle(goblin)
+        battle(goblin),
+        (victory -> quest(A,B,C,D,E), Bnew is A + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ;   EnemyID =:= 3 ->
-        battle(wolf)
+        battle(wolf),
+        (victory -> quest(A,B,C,D,E), Cnew is A + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ;   EnemyID =:= 4 ->
-        battle(golem)
+        battle(golem),
+        (victory -> quest(A,B,C,D,E), Dnew is A + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ;   EnemyID =:= 5 ->
-        battle(wizard)
+        battle(wizard),
+        (victory -> quest(A,B,C,D,E), Enew is A + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory);write('Silahkan temukan enemy lagi'),nl)
     ).
 
 teleport :-

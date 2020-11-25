@@ -30,6 +30,7 @@ start :-
     nl,
     write('Selamat datang pemuda pencari tujuan hidup'),nl,
     write('Siapakah nama kamu?'),nl,
+    asserta(quest(0,0,0,0,0)),
     read(Username),
     asserta(nama(Username)),
     write('Halo '), write(Username), nl,
