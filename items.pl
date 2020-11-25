@@ -49,7 +49,7 @@ addInventory(_) :-
 	cekIsi(Length),
 	maxInventory(Max),
 	Length >= Max,
-	write('Sudah Penuh'),
+	write('Inventory sudah penuh.'),
 	!,fail.
 
 addInventory(Nama) :-
@@ -59,10 +59,50 @@ addInventory(Nama) :-
 
 delInventory(Nama) :-
 	\+inventory(_,_,Nama,_,_,_),
-	write('Tidak ada item tersebut di inventory Anda'),
+	write('Tidak ada item tersebut di inventory Anda.'),
 	!,fail.
 
 delInventory(Nama) :-
 	retract(inventory(_,_,Nama,_,_,_)),
+	write(Nama),
+	write(' berhasil dihapus dari inventory.'),
+	!.
+
+use(Nama) :-
+	\+inventory(_,_,Nama,_,_,_),
+	write('Tidak ada item tersebut di inventory Anda.'),
+	!,fail.
+
+use(Nama) :-
+	item(ID,Pengguna,Nama,HP,Att,Def),
+	character(Jenis,Health,Attack,Defense,_,_,_),	
+	Jenis \== Pengguna,
+	write('Pemain tidak dapat menggunakan item ini.'),
+	!.
+
+use(Nama) :-
+	item(ID,Pengguna,Nama,HP,Att,Def),
+	character(Jenis,Health,Attack,Defense,E,F,G),	
+	Jenis=Pengguna,
+	Hnew is Health + HP * Health,
+	Anew is Attack + Att * Attack,
+	Dnew is Defense + Def * Defense,
+	Hnew > Hmax,
+	retract(inventory(_,_,Nama,_,_,_)),
+	retract(character(Jenis,Health,Attack,Defense,E,F,G)),
+	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G)),
+	!.
+
+use(Nama) :-
+	item(ID,Pengguna,Nama,HP,Att,Def),
+	character(Jenis,Health,Attack,Defense,E,F,G),	
+	Jenis=Pengguna,
+	Hnew is Health + HP * Health,
+	Anew is Attack + Att * Attack,
+	Dnew is Defense + Def * Defense,
+	Hnew =< Hmax,
+	retract(inventory(_,_,Nama,_,_,_)),
+	retract(character(Jenis,Health,Attack,Defense,E,F,G)),
+	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G)),
 	!.
 	
