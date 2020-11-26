@@ -103,12 +103,6 @@ printMap(X,Y) :-
     printMap(NextX,Y).
 
 printMap(X,Y) :-
-    isPlayer(X,Y),
-    write('P'),
-    NextX is (X+1),
-    printMap(NextX,Y).
-
-printMap(X,Y) :-
     isStore(X,Y),
     write('S'),
     NextX is (X+1),
@@ -132,6 +126,12 @@ printMap(X,Y) :-
     NextX is (X+1),
     printMap(NextX,Y).
 
+printMap(X,Y) :-
+    isPlayer(X,Y),
+    write('P'),
+    NextX is (X+1),
+    printMap(NextX,Y).
+    
 printMap(X,Y) :-
     \+isBorder(X,Y),
     write('-'),
