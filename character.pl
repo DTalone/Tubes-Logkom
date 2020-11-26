@@ -22,10 +22,11 @@ levelUp :- character(A,B,C,D,E,F,G,H), F >= G,
           retract(character(A,B,C,D,E,F,G,H)), asserta(character(A,B,Cnew,Dnew,Enew,Fnew,Gnew, Hnew)),
           write('Level up '), write(E), write(' -> '),write(Enew),nl,!.
 
-status :- character(A,B,C,D,E,F,G,H),
+status :- character(A,B,C,D,E,F,G,H),gold(Gold),
           write('Job      : '), write(A),nl,
           write('HP       : '), write(B),write('/'),write(H),nl,
           write('Attack   : '), write(C),nl,
           write('Defense  : '), write(D),nl,
           write('Level    : '), write(E),nl,
-          write('Exp      : '), write(F),write('/'),write(G),nl,!.
+          write('Exp      : '), write(F),write('/'),write(G),nl,
+          write('Gold     : '), write(Gold),nl,!.

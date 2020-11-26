@@ -121,8 +121,8 @@ a :-
     isQuest(A-1,B),
     retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
-    asserta(inQuest(1)),
-    write('Anda berada di Quest'),
+    asserta(onQuest(1)),
+    write('Anda berada di Quest'),startQuest,
     !.
 
 a :-
@@ -205,8 +205,8 @@ s :-
     isQuest(A,B+1),
     retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
-    asserta(inQuest(1)),
-    write('Anda berada di Quest'),
+    asserta(onQuest(1)),
+    write('Anda berada di Quest'),startQuest,
     !.
 
 s :-
@@ -289,8 +289,8 @@ d :-
     isQuest(A+1,B),
     retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
-    asserta(inQuest(1)),
-    write('Anda berada di Quest'),
+    asserta(onQuest(1)),
+    write('Anda berada di Quest'),startQuest,
     !.
 
 d :-
@@ -379,7 +379,7 @@ randomEnemy(_,X) :-
         write('Anda menemukan Wizard!'),nl,
         battle(wizard)
         % (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest)
-    ),quest(A,B,C,D,E),!,
+    ),quest(A,B,C,D,E),
     (
         EnemyID =:= 1 ->
         (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest;retract(running(1)),retractall(round(_)),start)
