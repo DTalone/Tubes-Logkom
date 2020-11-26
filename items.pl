@@ -50,36 +50,36 @@ isFull :-
 addInventory(_) :-
 	cekIsi(Length),
 	maxInventory(Max),
-	Length >= Max,
+	Length >= Max,nl,
 	write('Inventory sudah penuh.'),
 	!,fail.
 
 addInventory(Nama) :-
 	item(ID,Pengguna,Jenis,Nama,HP,Att,Def),
-	asserta(inventory(ID,Pengguna,Jenis,Nama,HP,Att,Def)),
+	asserta(inventory(ID,Pengguna,Jenis,Nama,HP,Att,Def)),nl,
 	write('Item berhasil disimpan ke dalam inventory.'),!.
 
 delInventory(Nama) :-
 	\+inventory(_,_,_,Nama,_,_,_),
-	write('Tidak ada item tersebut di inventory Anda.'),
+	write('Tidak ada item tersebut di inventory Anda.'),nl,
 	!,fail.
 
 delInventory(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	write(Nama),
-	write(' berhasil dihapus dari inventory.'),
+	write(' berhasil dihapus dari inventory.'),nl,
 	!.
 
 use(Nama) :-
 	\+inventory(_,_,_,Nama,_,_,_),
-	write('Tidak ada item tersebut di inventory Anda.'),
+	write('Tidak ada item tersebut di inventory Anda.'),nl,
 	!,fail.
 
 use(Nama) :-
 	item(_,Pengguna,_,Nama,_,_,_),
 	character(Jenis,_,_,_,_,_,_,_),
 	Jenis \== Pengguna,
-	write('Pemain tidak dapat menggunakan item ini.'),
+	write('Pemain tidak dapat menggunakan item ini.'),nl,
 	!.
 
 use(Nama) :-
@@ -96,9 +96,7 @@ use(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
-	asserta(senjata(Weapon)),
-	write(''),nl,
-	write(''),nl,
+	asserta(senjata(Weapon)),nl,nl,
 	write('Berhasil memakai senjata'),nl,
 	!.
 
@@ -118,9 +116,7 @@ use(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
-	asserta(senjata(Weapon)),
-	write(''),nl,
-	write(''),nl,
+	asserta(senjata(Weapon)),nl,nl,
 	write('Berhasil mengganti senjata'),nl,
 	!.
 
@@ -138,9 +134,7 @@ use(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
-	asserta(senjata(Weapon)),
-	write(''),nl,
-	write(''),nl,
+	asserta(senjata(Weapon)),nl,nl,
 	write('Berhasil memakai senjata'),nl,
 	!.
 
@@ -160,9 +154,7 @@ use(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
-	asserta(senjata(Weapon)),
-	write(''),nl,
-	write(''),nl,
+	asserta(senjata(Weapon)),nl,nl,
 	write('Berhasil mengganti senjata'),nl,
 	!.
 
@@ -180,9 +172,7 @@ use(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
-	asserta(armor(Ar)),
-	write(''),nl,
-	write(''),nl,
+	asserta(armor(Ar)),nl,nl,
 	write('Berhasil memakai armor'),nl,
 	!.
 
@@ -202,9 +192,7 @@ use(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
-	asserta(armor(Ar)),
-	write(''),nl,
-	write(''),nl,
+	asserta(armor(Ar)),nl,nl,
 	write('Berhasil mengganti armor'),nl,
 	!.
 
@@ -222,9 +210,7 @@ use(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
-	asserta(armor(Ar)),
-	write(''),nl,
-	write(''),nl,
+	asserta(armor(Ar)),nl,nl,
 	write('Berhasil memakai armor'),nl,
 	!.
 
@@ -244,9 +230,7 @@ use(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
-	asserta(armor(Ar)),
-	write(''),nl,
-	write(''),nl,
+	asserta(armor(Ar)),nl,nl,
 	write('Berhasil mengganti senjata'),nl,
 	!.
 
@@ -265,7 +249,8 @@ usePotions(Nama) :-
 	Hnew > Hmax,
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
-	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
+	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),nl,nl,
+	write('Potion berhasil dipakai.'),nl,
 	!.
 
 usePotions(Nama) :-
@@ -278,5 +263,24 @@ usePotions(Nama) :-
 	Hnew =< Hmax,
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
-	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
+	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),nl,nl,
+	write('Potion berhasil dipakai.'),nl,
 	!.
+
+print_list([]).
+print_list([A|B]) :-
+  	write(A),nl,
+  	print_list(B).
+
+cekInventory :-
+	\+inventory(_,_,_,_,_,_,_),nl,
+	write('Inventory kosong'),nl,
+	!.
+
+cekInventory :-
+	nl,
+	write('Inventory Pemain :'),nl,
+	findall(Nama,inventory(_,_,_,Nama,_,_,_),List),
+	print_list(List),
+	!.
+
