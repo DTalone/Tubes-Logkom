@@ -20,7 +20,7 @@ mainQuest :-  \+onQuest(_),asserta(onQuest(1)),quest(A,B,C,D,E),
               ;X =:= 5 -> beforeBoss,bossMode).
 
 
-dailyQuest :- \+onQuest(_),asserta(onQuest(1)),currQuest(A,B,C,D,E),
+dailyQuest :- \+onQuest(_),asserta(onQuest(2)),currQuest(A,B,C,D,E),
               retractall(currQuest(A,B,C,D,E)),
               repeat,
               write('Selamat datang di dalam daily quest :'),nl,
@@ -54,35 +54,35 @@ daily3 :- write('Slime, Goblin, Golem, dan Wolf adalah golongan ras monster prib
           asserta(currQuest(4,4,4,4,0)).
 
 cekQuest :- onQuest(_), quest(A,B,C,D,E), currQuest(F,G,H,I,J), A >= F, B >= G, C >= H, D >= I, E >= J,
-            onQuest(X), (X =:= 0 -> chapter(Y);daily(Y)),
-            collect(X,Y), retract(currQuest(F,G,H,I,J)),write('sdfadsfa'),!.
+            onQuest(X), (X =:= 1 -> chapter(Y);daily(Y)),
+            collect(X,Y), retract(currQuest(F,G,H,I,J)),!.
 
 collect(A,B) :- character(AA,BB,C,D,E,F,G,H), gold(X),
-                (A =:= 0 , B =:= 1 -> Fnew is F + 300, Xnew is X + 500,
+                (A =:= 1 , B =:= 1 -> Fnew is F + 300, Xnew is X + 500,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew)),afterStory1
-                ;A =:= 0, B =:= 2 -> Fnew is F + 400, Xnew is X + 1000,
+                ;A =:= 1, B =:= 2 -> Fnew is F + 400, Xnew is X + 1000,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew)),afterStory2
-                ;A =:= 0, B =:= 3 -> Fnew is F + 500, Xnew is X + 1500,
+                ;A =:= 1, B =:= 3 -> Fnew is F + 500, Xnew is X + 1500,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew)),afterStory3
-                ;A =:= 0, B =:= 4 -> Fnew is F + 600, Xnew is X + 2000,
+                ;A =:= 1, B =:= 4 -> Fnew is F + 600, Xnew is X + 2000,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew)),afterStory4
-                ;A =:= 0, B =:= 5 -> Fnew is F + 700, Xnew is X + 3000,
+                ;A =:= 1, B =:= 5 -> Fnew is F + 700, Xnew is X + 3000,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew)),afterStory5
-                ;A =:= 1, B =:= 1 -> Fnew is F + 100, Xnew is X + 50,
+                ;A =:= 2, B =:= 1 -> Fnew is F + 100, Xnew is X + 50,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew))
-                ;A =:= 1, B =:= 2 -> Fnew is F + 200, Xnew is X + 100,
+                ;A =:= 2, B =:= 2 -> Fnew is F + 200, Xnew is X + 100,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew))
-                ;A =:= 1, B =:= 3 -> Fnew is F + 300, Xnew is X + 200,
+                ;A =:= 2, B =:= 3 -> Fnew is F + 300, Xnew is X + 200,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew))),
-                levelUp.
+                ,retractall(onQuest(_)),levelUp.
 
 
 
