@@ -103,14 +103,15 @@ use(Nama) :-
 	!.
 
 use(Nama) :-
-	senjata(_),
+	senjata(Cur),
 	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
+	item(_,_,_,Cur,_,AttCur,_),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	Jenis=Pengguna,
 	JenisIt='senjata', 
 	Weapon is Nama,
 	Hnew is Health + HP,
-	Anew is Attack + Att,
+	Anew is Attack + Att - AttCur,
 	Dnew is Defense + Def,
 	Hnew > Hmax,
 	retract(senjata(_)),
@@ -144,14 +145,15 @@ use(Nama) :-
 	!.
 
 use(Nama) :-
-	senjata(_),
+	senjata(Cur),
 	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
+	item(_,_,_,Cur,_,AttCur,_),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	Jenis=Pengguna,
 	JenisIt='senjata', 
 	Weapon is Nama,
 	Hnew is Health + HP,
-	Anew is Attack + Att,
+	Anew is Attack + Att - AttCur,
 	Dnew is Defense + Def,
 	Hnew =< Hmax,
 	retract(senjata(_)),
@@ -185,15 +187,16 @@ use(Nama) :-
 	!.
 
 use(Nama) :-
-	armor(_),
+	armor(Cur),
 	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
+	item(_,_,_,Cur,_,_,DefCur),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	Jenis=Pengguna,
 	JenisIt='armor', 
 	Ar is Nama,
 	Hnew is Health + HP,
 	Anew is Attack + Att,
-	Dnew is Defense + Def,
+	Dnew is Defense + Def - DefCur,
 	Hnew > Hmax,
 	retract(armor(_)),
 	retract(inventory(_,_,_,Nama,_,_,_)),
@@ -226,15 +229,16 @@ use(Nama) :-
 	!.
 
 use(Nama) :-
-	armor(_),
+	armor(Cur),
 	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
+	item(_,_,_,Cur,_,_,DefCur),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	Jenis=Pengguna,
 	JenisIt='armor', 
 	Ar is Nama,
 	Hnew is Health + HP,
 	Anew is Attack + Att,
-	Dnew is Defense + Def,
+	Dnew is Defense + Def - DefCur,
 	Hnew =< Hmax,
 	retract(armor(_)),
 	retract(inventory(_,_,_,Nama,_,_,_)),
