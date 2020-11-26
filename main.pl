@@ -10,8 +10,6 @@
 :- dynamic(victory/0).
 :- dynamic(quest/5).
 
-quest(0,0,0,0,0).
-
 :- include('character.pl').
 :- include('map.pl').
 :- include('exploration.pl').
@@ -37,6 +35,7 @@ start :-
     write('1. New Game.'),nl,
     write('2. Load Game.'),nl,
     write('Masukkan angka : '),read(X),
+    asserta(quest(0,0,0,0,0)),
     (X =:= 1 -> newGame
     ;X =:= 2 -> load),
     asserta(running(1)),!.
@@ -48,6 +47,7 @@ newGame:- write('Siapakah nama kamu? (tulis di antara tanda petik dan diakhiri t
           asserta(nama(Username)),nl,
           write('Halo '), write(Username),write('! Selamat Bermain.'),nl,nl,
           asserta(running(1)),
+          asserta(chapter(0)),
           initChar,
           initEnemy,
           initMap,

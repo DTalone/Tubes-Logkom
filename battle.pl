@@ -10,11 +10,12 @@ battle(A) :- adjusmentEnemy(A),
           fight,
           retractall(currEnemy(_,_,_,_,_,_)),
           retractall(round(_)),
+          (kabur -> !;
           character(S,T,U,V,W,X,Y,Z),
           Xnew is X + E * 100,
           retract(character(S,T,U,V,W,X,Y,Z)),
           asserta(character(S,T,U,V,W,Xnew,Y,Z)),!,
-          levelUp.
+          levelUp).
 
 bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalanan Anda!\n'),
           enemy('rajagledek',B,C,D,E),

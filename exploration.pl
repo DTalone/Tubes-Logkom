@@ -37,7 +37,6 @@ w :-
     isQuest(A,B-1),
     retract(posisi(A,B)),
     asserta(posisi(A,B-1)),
-    asserta(onQuest(1)),
     write('Anda berada di Quest'),startQuest,
     !.
 
@@ -69,7 +68,6 @@ w :-
     posisi(A,B),
     \+cekArea(A,B),
     retractall(inStore(_)),
-    retractall(onQuest(_)),
     retractall(dungeon(_)),
     retractall(teleport(_)),
     asserta(posisi(A,B-1)),
@@ -121,7 +119,6 @@ a :-
     isQuest(A-1,B),
     retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
-    asserta(onQuest(1)),
     write('Anda berada di Quest'),startQuest,
     !.
 
@@ -153,7 +150,6 @@ a :-
     posisi(A,B),
     \+cekArea(A,B),
     retractall(inStore(_)),
-    retractall(onQuest(_)),
     retractall(dungeon(_)),
     retractall(teleport(_)),
     asserta(posisi(A-1,B)),
@@ -205,7 +201,6 @@ s :-
     isQuest(A,B+1),
     retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
-    asserta(onQuest(1)),
     write('Anda berada di Quest'),startQuest,
     !.
 
@@ -237,7 +232,6 @@ s :-
     posisi(A,B),
     \+cekArea(A,B),
     retractall(inStore(_)),
-    retractall(onQuest(_)),
     retractall(dungeon(_)),
     retractall(teleport(_)),
     asserta(posisi(A,B+1)),
@@ -289,7 +283,6 @@ d :-
     isQuest(A+1,B),
     retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
-    asserta(onQuest(1)),
     write('Anda berada di Quest'),startQuest,
     !.
 
@@ -321,7 +314,6 @@ d :-
     posisi(A,B),
     \+cekArea(A,B),
     retractall(inStore(_)),
-    retractall(onQuest(_)),
     retractall(dungeon(_)),
     retractall(teleport(_)),
     asserta(posisi(A+1,B)),
@@ -382,15 +374,15 @@ randomEnemy(_,X) :-
     ),quest(A,B,C,D,E),
     (
         EnemyID =:= 1 ->
-        (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest;retract(running(1)),retractall(round(_)),start)
+        (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest;kabur -> retractall(kabur),!;retract(running(1)),retractall(round(_)),start)
     ;   EnemyID =:= 2 ->
-        (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest;retract(running(1)),retractall(round(_)),start)
+        (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest;kabur -> retractall(kabur),!;retract(running(1)),retractall(round(_)),start)
     ;   EnemyID =:= 3 ->
-        (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory),cekQuest;retract(running(1)),retractall(round(_)),start)
+        (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory),cekQuest;kabur -> retractall(kabur),!;retract(running(1)),retractall(round(_)),start)
     ;   EnemyID =:= 4 ->
-        (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory),cekQuest;retract(running(1)),retractall(round(_)),start)
+        (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory),cekQuest;kabur -> retractall(kabur),!;retract(running(1)),retractall(round(_)),start)
     ;   EnemyID =:= 5 ->
-        (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest;retract(running(1)),retractall(round(_)),start)
+        (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest;kabur -> retractall(kabur),!;retract(running(1)),retractall(round(_)),start)
     ).
 
 teleport :-

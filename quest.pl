@@ -4,12 +4,12 @@ startQuest:- write('\nSelamat datang di Quest\n'),
              write('Pilihan quest\n'),
              write('1. Main Quest.\n'),
              write('2. Daily Quest.\n'),
-             write('Masukkan angka : - '),nl,read(X),
+             write('Masukkan angka : '),read(X),
              (X =:= 1  -> mainQuest
               ;X =:= 2 -> dailyQuest).
 
-mainQuest :-  onQuest(_),asserta(onQuest(1)),currQuest(A,B,C,D,E),
-              retractall(currQuest(A,B,C,D,E)),
+mainQuest :-  \+onQuest(_),asserta(onQuest(1)),quest(A,B,C,D,E),
+              retractall(quest(A,B,C,D,E)),asserta(quest(0,0,0,0,0)), retractall(currQuest(_,_,_,_,_)),
               chapter(X),
               Xnew is X + 1, retractall(chapter(_)), asserta(chapter(Xnew)),
               (X =:= 0 -> beforeStory1,asserta(currQuest(10,0,0,0,0))
@@ -20,7 +20,7 @@ mainQuest :-  onQuest(_),asserta(onQuest(1)),currQuest(A,B,C,D,E),
               ;X =:= 5 -> beforeBoss,bossMode).
 
 
-dailyQuest :- \+onQuest(_),assert(onQuest(1)),currQuest(A,B,C,D,E),
+dailyQuest :- \+onQuest(_),asserta(onQuest(1)),currQuest(A,B,C,D,E),
               retractall(currQuest(A,B,C,D,E)),
               repeat,
               write('Selamat datang di dalam daily quest :'),nl,
