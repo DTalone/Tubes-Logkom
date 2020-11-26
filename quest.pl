@@ -4,7 +4,7 @@ startQuest:- write('\nSelamat datang di Quest\n'),
              write('Pilihan quest\n'),
              write('1. Main Quest.\n'),
              write('2. Daily Quest.\n'),
-             write('Masukkan angka : - '),read(X),
+             write('Masukkan angka : - '),nl,read(X),
              (X =:= 1  -> mainQuest
               ;X =:= 2 -> dailyQuest).
 

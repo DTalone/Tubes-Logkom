@@ -121,8 +121,8 @@ a :-
     isQuest(A-1,B),
     retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
-    asserta(inQuest(1)),
-    write('Anda berada di Quest'),
+    asserta(onQuest(1)),
+    write('Anda berada di Quest'),startQuest,
     !.
 
 a :-
@@ -205,8 +205,8 @@ s :-
     isQuest(A,B+1),
     retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
-    asserta(inQuest(1)),
-    write('Anda berada di Quest'),
+    asserta(onQuest(1)),
+    write('Anda berada di Quest'),startQuest,
     !.
 
 s :-
@@ -289,8 +289,8 @@ d :-
     isQuest(A+1,B),
     retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
-    asserta(inQuest(1)),
-    write('Anda berada di Quest'),
+    asserta(onQuest(1)),
+    write('Anda berada di Quest'),startQuest,
     !.
 
 d :-
