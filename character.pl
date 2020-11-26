@@ -4,7 +4,11 @@
 
 % character(Jenis, HP, attack, defense, level, exp, base exp, max HP)
 % character(A,B,C,D,E,F,G,H)
-initChar :- write('Silahkan pilih role : '), read(Role),
+initChar :- write('Role yang tersedia'),nl,
+            write('- archer.'),nl,
+            write('- swordsman.'),nl,
+            write('- sorcerer.'),nl,
+            write('Silahkan pilih role : - '), read(Role),nl,
             (Role = 'archer' ->asserta(character('archer', 500,120,50,1,0,300, 500)) ;
             Role = 'swordsman' ->asserta(character('swordsman', 700,130,60,1,0,300,700));
               Role = 'sorcerer' ->asserta(character('sorcerer', 600,160,40,1,0,300,600))).

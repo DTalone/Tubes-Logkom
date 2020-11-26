@@ -4,16 +4,16 @@
 
 battle(A) :- adjusmentEnemy(A),
           enemy(A,B,C,D,E),
-          asserta(round(0)),
+          asserta(round(1)),
           asserta(currEnemy(A,B,C,D,E,B)),
           printStat,
           fight,
           retractall(currEnemy(_,_,_,_,_,_)),
           retractall(round(_)),
           character(S,T,U,V,W,X,Y,Z),
-          Xnew is X + E * 300,
+          Xnew is X + E * 100,
           retract(character(S,T,U,V,W,X,Y,Z)),
-          asserta(character(S,T,U,V,W,Xnew,Y,Z)),
+          asserta(character(S,T,U,V,W,Xnew,Y,Z)),!,
           levelUp.
 
 bossMode:- enemy(A,B,C,D,E),
@@ -26,9 +26,9 @@ bossMode:- enemy(A,B,C,D,E),
           (victory -> write('Selamat kamu memenangkan game ini!'),nl;write('Game Over'),nl).
 
 fight :-  repeat,
+          turnUser,
           round(Round), Roundnew is Round + 1,
           retract(round(Round)), asserta(round(Roundnew)),
-          turnUser,
           currEnemy(_,W,_,_,_,_),
           (endCondition(W,2) -> asserta(victory),write('Kamu menang'),nl,!;turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,!;fight)).
 

@@ -1,7 +1,14 @@
 :- dynamic(currQuest/5).
 
+startQuest:- write('Selamat datang di Quest\n'),
+             write('Pilihan quest\n'),
+             write('1. Main Quest.\n'),
+             write('2. Daily Quest.\n'),
+             write('Masukkan angka : - '),read(X),
+             (X =:= 1  -> mainQuest
+              ;X =:= 2 -> dailyQuest).
 
-mainQuest :-  \+onQuest(_),assert(onQuest(0)),currQuest(A,B,C,D,E),
+mainQuest :-  onQuest(_),asserta(onQuest(1)),currQuest(A,B,C,D,E),
               retractall(currQuest(A,B,C,D,E)),
               chapter(X),
               Xnew is X + 1, retractall(chapter(_)), asserta(chapter(Xnew)),
@@ -49,7 +56,7 @@ daily3 :- write('Slime, Goblin, Golem, dan Wolf adalah golongan ras monster prib
 cekQuest :- onQuest(_), quest(A,B,C,D,E), currQuest(F,G,H,I,J), A >= F, B >= G, C >= H, D >= I, E >= J,
             onQuest(X), (X =:= 0 -> chapter(Y);daily(Y)),
             collect(X,Y), retract(currQuest(F,G,H,I,J)),write('sdfadsfa'),!.
-            
+
 collect(A,B) :- character(AA,BB,C,D,E,F,G,H), gold(X),
                 (A =:= 0 , B =:= 1 -> Fnew is F + 300, Xnew is X + 500,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),

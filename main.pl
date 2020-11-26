@@ -21,7 +21,6 @@ quest(0,0,0,0,0).
 :- include('battle.pl').
 :- include('store.pl').
 
-
 start :-
     running(_),
     write('Permainan sudah dimulai!'),!.
@@ -36,12 +35,15 @@ start :-
     nl,
     write('Selamat datang pemuda pencari tujuan hidup'),nl,
     write('- newGame.'),nl,
-    write('- loadGame.'),nl.
+    write('- loadGame.'),nl,
+    write('Masukkan pilihan : - '),read(X), X, asserta(running(1)),!.
 
-newGame:- write('Siapakah nama kamu?'),nl,
-          read(Username),
-          asserta(nama(Username)),
-          write('Halo '), write(Username), nl,
+newGame :- running(_), write('Permainan sudah dimulai!'),!.
+
+newGame:- write('Siapakah nama kamu? (tulis di antara tanda petik dan diakhiri titik. Contoh: \'Silvanna\'.)'),nl,
+          write('Nama : '), read(Username),
+          asserta(nama(Username)),nl,
+          write('Halo '), write(Username),write('! Selamat Bermain.'),nl,nl,
           asserta(running(1)),
           initChar,
           initEnemy,
@@ -62,9 +64,9 @@ quit :-
     \+running(_),
     write('Permainan belum dimulai!'),!.
 
-quit :- write('Terima kasih telah bermain'),nl,
-        sleep(5),
-        halt.
+quit :- retract(running(1)), write('Terima kasih telah bermain'),nl.
+        % sleep(5),
+        % halt.
 saveGame(_) :-
 	\+running(_),
 	write('Perintah ini hanya bisa dipakai setelah pemainan dimulai.'), nl,
