@@ -34,9 +34,12 @@ start :-
     write( '_|_|_|_|    _|_|      _|_|_|  _|    _|        _|_|_|    _|_|    _|      _|'),nl,
     nl,
     write('Selamat datang pemuda pencari tujuan hidup'),nl,
-    write('- newGame.'),nl,
-    write('- loadGame.'),nl,
-    write('Masukkan pilihan : - '),read(X), X, asserta(running(1)),!.
+    write('1. New Game.'),nl,
+    write('2. Load Game.'),nl,
+    write('Masukkan angka : '),read(X),
+    (X =:= 1 -> newGame
+    ;X =:= 2 -> load),
+    asserta(running(1)),!.
 
 newGame :- running(_), write('Permainan sudah dimulai!'),!.
 
@@ -77,6 +80,7 @@ saveGame(FileName) :-
         tell(FileName),
             write('nama('), write(Username),write(').'),nl,
         told, !.
+load.
 loadGame(_) :-
 	running(_),
 	write('Kamu sudah memulai permainan.'), nl, !.

@@ -38,7 +38,7 @@ w :-
     retract(posisi(A,B)),
     asserta(posisi(A,B-1)),
     asserta(onQuest(1)),
-    write('Anda berada di Quest'),
+    write('Anda berada di Quest'),startQuest,
     !.
 
 w :-

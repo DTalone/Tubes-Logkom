@@ -5,13 +5,13 @@
 % character(Jenis, HP, attack, defense, level, exp, base exp, max HP)
 % character(A,B,C,D,E,F,G,H)
 initChar :- write('Role yang tersedia'),nl,
-            write('- archer.'),nl,
-            write('- swordsman.'),nl,
-            write('- sorcerer.'),nl,
-            write('Silahkan pilih role : - '), read(Role),nl,
-            (Role = 'archer' ->asserta(character('archer', 500,120,50,1,0,300, 500)) ;
-            Role = 'swordsman' ->asserta(character('swordsman', 700,130,60,1,0,300,700));
-              Role = 'sorcerer' ->asserta(character('sorcerer', 600,160,40,1,0,300,600))).
+            write('1. Archer.'),nl,
+            write('2. Swordsman.'),nl,
+            write('3. Sorcerer.'),nl,
+            write('Masukkan angka : '), read(X),nl,
+            (X =:= 1 ->asserta(character('archer', 500,120,50,1,0,300, 500)) ;
+            X =:= 2 ->asserta(character('swordsman', 700,130,60,1,0,300,700));
+              X =:= 3 ->asserta(character('sorcerer', 600,160,40,1,0,300,600))).
 levelUp :- character(A,B,C,D,E,F,G,H), F >= G,
           Hnew is H + 100 * E,
           Cnew is C + 50 * E,

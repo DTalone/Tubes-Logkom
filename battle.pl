@@ -30,14 +30,16 @@ fight :-  repeat,
           round(Round), Roundnew is Round + 1,
           retract(round(Round)), asserta(round(Roundnew)),
           currEnemy(_,W,_,_,_,_),
-          (endCondition(W,2) -> asserta(victory),write('Kamu menang'),nl,!;turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,!;fight)).
+          (endCondition(W,2) -> asserta(victory),write('Kamu menang'),nl,!;
+          kabur -> !;
+          turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,!;fight)).
 
 turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             write('- attack.'),nl,
             write('- specialAttack.'),nl,
             write('- run.'),nl,
             write('- usePotions.'),nl,
-            read(X),X, printStat.
+            read(X),X,(kabur -> write('Anda berhasil kabur!\n');printStat).
 
 turnEnemy :- character(A,B,C,D,E,F,G,H),
             currEnemy(_,_,K,_,_,_),
@@ -97,5 +99,5 @@ endCondition(X,Y):- Y = 2,  X < 1 , nl,!.
 % usePotions :-
 %
 
-run :- random(1,100,X),
-    ( X < 50 -> !; fail).
+run :- random(1,50,X),  retractall(kabur),nl,
+    ( X < 25 -> asserta(kabur),!;write('Anda tidak berhasil kabur!\n')).
