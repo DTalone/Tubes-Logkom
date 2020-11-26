@@ -51,7 +51,6 @@ newGame:- write('Siapakah nama kamu? (tulis di antara tanda petik dan diakhiri t
           initChar,
           initEnemy,
           initMap,
-          randomizeWall,
           story0,
           !.
 

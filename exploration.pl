@@ -70,6 +70,7 @@ w :-
     retractall(inStore(_)),
     retractall(dungeon(_)),
     retractall(teleport(_)),
+    retract(posisi(A,B)),
     asserta(posisi(A,B-1)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke utara.'),nl),
     !.
@@ -152,6 +153,7 @@ a :-
     retractall(inStore(_)),
     retractall(dungeon(_)),
     retractall(teleport(_)),
+    retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke barat.'),nl),
     !.
@@ -234,6 +236,7 @@ s :-
     retractall(inStore(_)),
     retractall(dungeon(_)),
     retractall(teleport(_)),
+    retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke selatan.'),nl),
     !.
@@ -316,6 +319,7 @@ d :-
     retractall(inStore(_)),
     retractall(dungeon(_)),
     retractall(teleport(_)),
+    retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke timur.'),nl),
     !.
@@ -356,7 +360,7 @@ randomEnemy(_,X) :-
         battle(slime),
         (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over\n'), quit
+        ;gameOver -> write('Game Over'), quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest)
     ;   EnemyID =:= 2 ->
@@ -364,7 +368,7 @@ randomEnemy(_,X) :-
         battle(goblin),
         (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over\n'), quit
+        ;gameOver -> write('Game Over'), quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest)
     ;   EnemyID =:= 3 ->
@@ -372,7 +376,7 @@ randomEnemy(_,X) :-
         battle(wolf),
         (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over\n'), quit
+        ;gameOver -> write('Game Over'), quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 4 ->
@@ -380,7 +384,7 @@ randomEnemy(_,X) :-
         battle(golem),
         (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over\n'), quit
+        ;gameOver -> write('Game Over'), quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 5 ->
@@ -388,7 +392,7 @@ randomEnemy(_,X) :-
         battle(wizard),
         (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over\n'), quit
+        ;gameOver -> write('Game Over'), quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest)
     ).
