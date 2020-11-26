@@ -12,7 +12,7 @@ battle(A) :- adjusmentEnemy(A),
           retractall(round(_)),
           (kabur -> !
           ;gameOver -> !
-          ;character(S,T,U,V,W,X,Y,Z),
+          ;victory -> character(S,T,U,V,W,X,Y,Z),
           Xnew is X + E * 100,
           retract(character(S,T,U,V,W,X,Y,Z)),
           asserta(character(S,T,U,V,W,Xnew,Y,Z)),!,
