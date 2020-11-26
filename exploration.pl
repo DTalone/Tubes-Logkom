@@ -1,5 +1,4 @@
 /* File untuk eksplorasi */
-:- dynamic(inQuest/1).
 :- dynamic(teleport/1).
 :- dynamic(dungeon/1).
 
@@ -62,6 +61,19 @@ w :-
     asserta(posisi(A,B-1)),
     asserta(teleport(1)),
     write('Anda berada di Teleport'),
+    !.
+
+w :-
+    running(_),
+    \+round(_),
+    posisi(A,B),
+    \+cekArea(A,B),
+    retractall(inStore(_)),
+    retractall(onQuest(_)),
+    retractall(dungeon(_)),
+    retractall(teleport(_)),
+    asserta(posisi(A,B-1)),
+    (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke utara.'),nl),
     !.
 
 w :-
@@ -139,6 +151,19 @@ a :-
     running(_),
     \+round(_),
     posisi(A,B),
+    \+cekArea(A,B),
+    retractall(inStore(_)),
+    retractall(onQuest(_)),
+    retractall(dungeon(_)),
+    retractall(teleport(_)),
+    asserta(posisi(A-1,B)),
+    (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke barat.'),nl),
+    !.
+
+a :-
+    running(_),
+    \+round(_),
+    posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
@@ -210,6 +235,19 @@ s :-
     running(_),
     \+round(_),
     posisi(A,B),
+    \+cekArea(A,B),
+    retractall(inStore(_)),
+    retractall(onQuest(_)),
+    retractall(dungeon(_)),
+    retractall(teleport(_)),
+    asserta(posisi(A,B+1)),
+    (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke selatan.'),nl),
+    !.
+
+s :-
+    running(_),
+    \+round(_),
+    posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
@@ -275,6 +313,19 @@ d :-
     asserta(posisi(A+1,B)),
     asserta(teleport(1)),
     write('Anda berada di Teleport'),
+    !.
+
+d :-
+    running(_),
+    \+round(_),
+    posisi(A,B),
+    \+cekArea(A,B),
+    retractall(inStore(_)),
+    retractall(onQuest(_)),
+    retractall(dungeon(_)),
+    retractall(teleport(_)),
+    asserta(posisi(A+1,B)),
+    (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke timur.'),nl),
     !.
 
 d :-
