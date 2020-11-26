@@ -349,55 +349,48 @@ randomEnemy(_,X) :-
         random(3,5,EnemyID) % Di 5 <= Y <=7 awal bisa lawan Wolf / Golem
     ;   EnemyID is 5 % Di Y > 7 awal bisa lawan Wizard
     ),
-    % quest(A,B,C,D,E),
+    quest(A,B,C,D,E),
     (
         EnemyID =:= 1 ->
         write('Anda menemukan Slime!'),nl,
-        battle(slime)
-        % (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest)
-    ;   EnemyID =:= 2 ->
-        write('Anda menemukan Goblin!'),nl,
-        battle(goblin)
-        % (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest)
-    ;   EnemyID =:= 3 ->
-        write('Anda menemukan Wolf!'),nl,
-        battle(wolf)
-        % (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory),cekQuest)
-    ;   EnemyID =:= 4 ->
-        write('Anda menemukan Golem!'),nl,
-        battle(golem)
-        % (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory),cekQuest)
-    ;   EnemyID =:= 5 ->
-        write('Anda menemukan Wizard!'),nl,
-        battle(wizard)
-        % (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest)
-    ),
-    (
-        EnemyID =:= 1 -> quest(A,B,C,D,E),
+        battle(slime),
         (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over\n'), quit
         ;retract(running(1)),retractall(round(_)),start)
-    ;   EnemyID =:= 2 -> quest(A,B,C,D,E),
+        % (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest)
+    ;   EnemyID =:= 2 ->
+        write('Anda menemukan Goblin!'),nl,
+        battle(goblin),
         (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over\n'), quit
         ;retract(running(1)),retractall(round(_)),start)
-    ;   EnemyID =:= 3 -> quest(A,B,C,D,E),
+        % (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest)
+    ;   EnemyID =:= 3 ->
+        write('Anda menemukan Wolf!'),nl,
+        battle(wolf),
         (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over\n'), quit
         ;retract(running(1)),retractall(round(_)),start)
-    ;   EnemyID =:= 4 -> quest(A,B,C,D,E),
+        % (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory),cekQuest)
+    ;   EnemyID =:= 4 ->
+        write('Anda menemukan Golem!'),nl,
+        battle(golem),
         (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over\n'), quit
         ;retract(running(1)),retractall(round(_)),start)
-    ;   EnemyID =:= 5 -> quest(A,B,C,D,E),
+        % (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory),cekQuest)
+    ;   EnemyID =:= 5 ->
+        write('Anda menemukan Wizard!'),nl,
+        battle(wizard),
         (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over\n'), quit
         ;retract(running(1)),retractall(round(_)),start)
+        % (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest)
     ).
 
 teleport :-

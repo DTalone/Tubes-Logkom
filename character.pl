@@ -21,6 +21,7 @@ levelUp :- character(A,B,C,D,E,F,G,H), F >= G,
           Gnew is G + E * 100,
           retract(character(A,B,C,D,E,F,G,H)), asserta(character(A,B,Cnew,Dnew,Enew,Fnew,Gnew, Hnew)),
           write('Level up '), write(E), write(' -> '),write(Enew),nl,!.
+levelUp :-!.
 
 status :- character(A,B,C,D,E,F,G,H),gold(Gold),
           write('Job      : '), write(A),nl,
