@@ -16,14 +16,14 @@ battle(A) :- adjusmentEnemy(A),
           asserta(character(S,T,U,V,W,Xnew,Y,Z)),!,
           levelUp.
 
-bossMode:- enemy(A,B,C,D,E),
+bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalanan Anda!\n'),
+          enemy('rajagledek',B,C,D,E),
           asserta(round(0)),
-          adjusmentEnemy(A),
-          asserta(currEnemy(A,B,C,D,E,B)),
+          asserta(currEnemy('rajagledek',B,C,D,E,B)),
           fight,
           retractall(currEnemy(_,_,_,_,_)),
           retractall(round(_)),
-          (victory -> write('Selamat kamu memenangkan game ini!'),nl;write('Game Over'),nl).
+          (victory -> write('Selamat kamu memenangkan game ini!'),nl,asserta(gameWin);asserta(gameOver),write('Game Over'),nl).
 
 fight :-  repeat,
           turnUser,
@@ -32,7 +32,7 @@ fight :-  repeat,
           currEnemy(_,W,_,_,_,_),
           (endCondition(W,2) -> asserta(victory),write('Kamu menang'),nl,!;
           kabur -> !;
-          turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,!;fight)).
+          turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,asserta(gameOver),!;fight)).
 
 turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             write('- attack.'),nl,
