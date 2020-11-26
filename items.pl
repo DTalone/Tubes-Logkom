@@ -62,20 +62,20 @@ delInventory(Nama) :-
 	!,fail.
 
 delInventory(Nama) :-
-	retract(inventory(_,_,_,Nama,_,_,_)),
+	retract(inventory(_,_,_,Nama,_,_,_)),nl,
 	write(Nama),
 	write(' berhasil dihapus dari inventory.'),nl,
 	!.
 
 use(Nama) :-
-	\+inventory(_,_,_,Nama,_,_,_),
+	\+inventory(_,_,_,Nama,_,_,_),nl,
 	write('Tidak ada item tersebut di inventory Anda.'),nl,
 	!,fail.
 
 use(Nama) :-
 	item(_,Pengguna,_,Nama,_,_,_),
 	character(Jenis,_,_,_,_,_,_,_),
-	Jenis \== Pengguna,
+	Jenis \== Pengguna,nl,
 	write('Pemain tidak dapat menggunakan item ini.'),nl,
 	!.
 
@@ -270,12 +270,13 @@ print_list([A|B]) :-
   	print_list(B).
 
 cekInventory :-
+	running(_),
 	\+inventory(_,_,_,_,_,_,_),nl,
 	write('Inventory kosong'),nl,
 	!.
 
 cekInventory :-
-	nl,
+	running(_),nl,
 	write('Inventory Pemain :'),nl,
 	findall(Nama,inventory(_,_,_,Nama,_,_,_),List),
 	print_list(List),

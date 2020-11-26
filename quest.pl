@@ -81,7 +81,7 @@ collect(A,B) :- character(AA,BB,C,D,E,F,G,H), gold(X),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew))
                 ;A =:= 2, B =:= 3 -> Fnew is F + 300, Xnew is X + 200,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
-                asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew))),
+                asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew)))
                 ,retractall(onQuest(_)),levelUp.
 
 
