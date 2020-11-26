@@ -12,7 +12,6 @@ price(health_potion_m,500).
 price(health_potion_l,1000).
 price(enhancer_attack,750).
 price(enhancer_defense,750).
-price(freeze_potion,1000).
 
 random_equip(1,crossbow).
 random_equip(2,longbow).
@@ -24,31 +23,27 @@ random_equip(7,heavy_armor).
 random_equip(8,magic_robe).
 	
 store :-
-	store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	store(_),nl,nl,
 	write('Kamu sudah berada di store.'),
 	!.
 
 store :-
-	\+inStore(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+inStore(_),nl,nl,
 	write('Kamu masih terlalu jauh dari store.'),
 	!.
 
 store :-
-	\+store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+store(_),nl,nl,
     	write('Apa yang ingin Anda beli?'),nl,
     	write('1. Gacha (1000 gold)'),nl,
     	write('2. Health Potion S (200 gold)'),nl,
     	write('3. Health Potion M (500 gold)'),nl,
     	write('4. Health Potion L (1000 gold) '),nl,
     	write('5. Enhancer Attack (750 gold)'),nl,	
-    	write('6. Enhancer Defense (750 gold)'),nl,
-    	write('7. Freeze Potion (1000 gold)'),nl,
+    	write('6. Enhancer Defense (750 gold)'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,nl,
+	write('Masukkan nama item yang ingin dibeli dengan huruf kecil semua dan spasi digantikan dengan \'_\', diakhiri titik'),nl,
+	write('(mis : health_potion_s.) '),nl,
 	asserta(store(1)),
 	!.
 
@@ -60,28 +55,24 @@ gacha :-
 	retractall(gold(_)),
 	asserta(gold(Gnew)),
 	random(1,8,R),
-	random_equip(R,Equip),
-	write('                                '),nl,
-    	write('                                '),nl,
+	random_equip(R,Equip),nl,nl,
 	write('Pembelian berhasil'),nl,
 	write('Kamu mendapatkan equipment : '),
-	write(Equip),nl,
+	write(Equip),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	addInventory(Equip),
 	!.
 
 gacha :-
 	store(_),
 	gold(G),
-	G < 1000,
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,
+	G < 1000,nl,nl,
+	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 gacha :- 
-	\+store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+store(_),nl,nl,
 	write('Pemain tidak berada di dalam store.'),nl,
 	!.	
 
@@ -91,26 +82,22 @@ health_potion_s :-
 	G >= 200,
 	Gnew is G - 200,
 	retractall(gold(_)),
-	asserta(gold(Gnew)),
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian berhasil'),nl,
+	asserta(gold(Gnew)),nl,nl,
+	write('Pembelian berhasil'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	addInventory(health_potion_s),
 	!.
 
 health_potion_s :-
 	store(_),
 	gold(G),
-	G < 200,
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,
+	G < 200,nl,nl,
+	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 health_potion_s :- 
-	\+store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+store(_),nl,nl,
 	write('Pemain tidak berada di dalam store.'),nl,
 	!.
 
@@ -120,26 +107,22 @@ health_potion_m :-
 	G >= 500,
 	Gnew is G - 500,
 	retractall(gold(_)),
-	asserta(gold(Gnew)),
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian berhasil'),nl,
+	asserta(gold(Gnew)),nl,nl,
+	write('Pembelian berhasil'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	addInventory(health_potion_m),
 	!.
 
 health_potion_m :-
 	store(_),
 	gold(G),
-	G < 500,
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,
+	G < 500,nl,nl,
+	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,	
 	!.
 
 health_potion_m :- 
-	\+store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+store(_),nl,nl,
 	write('Pemain tidak berada di dalam store.'),nl,
 	!.
 
@@ -149,26 +132,22 @@ health_potion_l :-
 	G >= 1000,
 	Gnew is G - 1000,
 	retractall(gold(_)),
-	asserta(gold(Gnew)),
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian berhasil'),nl,
+	asserta(gold(Gnew)),nl,nl,
+	write('Pembelian berhasil'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	addInventory(health_potion_l),
 	!.
 
 health_potion_l :-
 	store(_),
 	gold(G),
-	G < 1000,
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,
+	G < 1000,nl,nl,
+	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 health_potion_l :- 
-	\+store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+store(_),nl,nl,
 	write('Pemain tidak berada di dalam store.'),nl,
 	!.
 
@@ -178,26 +157,22 @@ enhancer_attack :-
 	G >= 750,
 	Gnew is G - 750,
 	retractall(gold(_)),
-	asserta(gold(Gnew)),
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian berhasil'),nl,
+	asserta(gold(Gnew)),nl,nl,
+	write('Pembelian berhasil'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	addInventory(enhancer_attack),
 	!.
 
 enhancer_attack :-
 	store(_),
 	gold(G),
-	G < 750,
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,
+	G < 750,nl,nl,
+	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 enhancer_attack :- 
-	\+store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+store(_),nl,nl,
 	write('Pemain tidak berada di dalam store.'),nl,
 	!.
 
@@ -207,69 +182,32 @@ enhancer_defense :-
 	G >= 750,
 	Gnew is G - 750,
 	retractall(gold(_)),
-	asserta(gold(Gnew)),
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian berhasil'),nl,
+	asserta(gold(Gnew)),nl,nl,
+	write('Pembelian berhasil'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	addInventory(enhancer_defense),
 	!.
 
 enhancer_defense :-
 	store(_),
 	gold(G),
-	G < 750,
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,
+	G < 750,nl,nl,
+	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
+	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 enhancer_defense :- 
-	\+store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pemain tidak berada di dalam store.'),nl,
-	!.
-
-freeze_potion :-
-	store(_),
-	gold(G),
-	G >= 1000,
-	Gnew is G - 1000,
-	retractall(gold(_)),
-	asserta(gold(Gnew)),
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian berhasil'),nl,
-	addInventory(freeze_potion),
-	!.
-
-freeze_potion :-
-	store(_),
-	gold(G),
-	G < 1000,
-	write('                                '),nl,
-    	write('                                '),nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,
-	!.
-
-freeze_potion :- 
-	\+store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+store(_),nl,nl,
 	write('Pemain tidak berada di dalam store.'),nl,
 	!.
 
 exitStore :-
-	\+inStore(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	\+inStore(_),nl,nl,
 	write('Pemain tidak berada di dalam store.'),nl,
 	!.
 
 exitStore :-
-	store(_),
-	write('                                '),nl,
-    	write('                                '),nl,
+	store(_),nl,nl,
 	write('Terimakasih atas kehadirannya.'),nl,
 	retract(store(1)),
 	!.

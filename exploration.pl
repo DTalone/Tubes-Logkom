@@ -26,7 +26,8 @@ w :-
     retract(posisi(A,B)),
     asserta(posisi(A,B-1)),
     asserta(inStore(1)),
-    write('Anda berada di Store'),
+    write('Anda berada di Store'),nl,
+    write('Masukkan \'store.\' untuk melihat menu dan melakukan pembelian.'),nl,
     !.
 
 w :-
@@ -109,7 +110,8 @@ a :-
     retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
     asserta(inStore(1)),
-    write('Anda berada di Store'),
+    write('Anda berada di Store'),nl,
+    write('Masukkan \'store.\' untuk melihat menu dan melakukan pembelian.'),nl,
     !.
 
 a :-
@@ -192,7 +194,8 @@ s :-
     retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
     asserta(inStore(1)),
-    write('Anda berada di Store'),
+    write('Anda berada di Store'),nl,
+    write('Masukkan \'store.\' untuk melihat menu dan melakukan pembelian.'),nl,
     !.
 
 s :-
@@ -275,7 +278,8 @@ d :-
     retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
     asserta(inStore(1)),
-    write('Anda berada di Store'),
+    write('Anda berada di Store'),nl,
+    write('Masukkan \'store.\' untuk melihat menu dan melakukan pembelian.'),nl,
     !.
 
 d :-
