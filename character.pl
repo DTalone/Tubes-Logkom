@@ -1,6 +1,6 @@
 /* File : character.pl */
 
-:-dynamic(character/7).
+:-dynamic(character/8).
 
 % character(Jenis, HP, attack, defense, level, exp, base exp, max HP)
 % character(A,B,C,D,E,F,G,H)

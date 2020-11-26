@@ -10,8 +10,9 @@ battle(A) :- adjusmentEnemy(A),
           fight,
           retractall(currEnemy(_,_,_,_,_,_)),
           retractall(round(_)),
-          (kabur -> !;
-          character(S,T,U,V,W,X,Y,Z),
+          (kabur -> !
+          ;gameOver -> !
+          ;character(S,T,U,V,W,X,Y,Z),
           Xnew is X + E * 100,
           retract(character(S,T,U,V,W,X,Y,Z)),
           asserta(character(S,T,U,V,W,Xnew,Y,Z)),!,
@@ -31,9 +32,9 @@ fight :-  repeat,
           round(Round), Roundnew is Round + 1,
           retract(round(Round)), asserta(round(Roundnew)),
           currEnemy(_,W,_,_,_,_),
-          (endCondition(W,2) -> asserta(victory),write('Kamu menang'),nl,!;
+          (endCondition(W,2) -> asserta(victory),write('Kamu menang'),nl;
           kabur -> !;
-          turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,asserta(gameOver),!;fight)).
+          turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,asserta(gameOver);fight)).
 
 turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             write('- attack.'),nl,
@@ -100,5 +101,5 @@ endCondition(X,Y):- Y = 2,  X < 1 , nl,!.
 % usePotions :-
 %
 
-run :- random(1,50,X),  retractall(kabur),nl,
+run :- random(1,100,X),  retractall(kabur),nl,
     ( X < 25 -> asserta(kabur),!;write('Anda tidak berhasil kabur!\n')).

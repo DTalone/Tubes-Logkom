@@ -67,7 +67,29 @@ quit :-
     \+running(_),
     write('Permainan belum dimulai!'),!.
 
-quit :- retract(running(1)), write('Terima kasih telah bermain'),nl.
+quit :- retract(running(1)),
+        retractall(running(_)),
+        retractall(onQuest(_)),
+        retractall(posisi(_,_)),
+        retractall(gameOver),
+        retractall(gameWin),
+        retractall(nama(_)),
+        retractall(gold(_)),
+        retractall(chapter(_)),
+        retractall(daily(_)),
+        retractall(victory),
+        retractall(quest(_,_,_,_,_)),
+        retractall(currQuest(_,_,_,_,_)),
+        retractall(character(_,_,_,_,_,_,_,_)),
+        retractall(enemy(_,_,_,_,_)),
+        retractall(inventory(_,_,_,_,_,_,_)),
+        retractall(armor(_)),
+        retractall(senjata(_)),
+        retractall(wall(_,_,_,_)),
+        retractall(dungeon(_,_)),
+        retractall(panjang(_)),
+        retractall(lebar(_)),
+        write('Terima kasih telah bermain'),nl.
         % sleep(5),
         % halt.
 saveGame(_) :-
