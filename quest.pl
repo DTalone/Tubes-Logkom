@@ -1,6 +1,6 @@
 :- dynamic(currQuest/5).
 
-startQuest:- write('Selamat datang di Quest\n'),
+startQuest:- write('\nSelamat datang di Quest\n'),
              write('Pilihan quest\n'),
              write('1. Main Quest.\n'),
              write('2. Daily Quest.\n'),

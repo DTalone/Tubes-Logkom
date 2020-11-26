@@ -379,7 +379,7 @@ randomEnemy(_,X) :-
         write('Anda menemukan Wizard!'),nl,
         battle(wizard)
         % (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest)
-    ),quest(A,B,C,D,E),!,
+    ),quest(A,B,C,D,E),
     (
         EnemyID =:= 1 ->
         (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest;retract(running(1)),retractall(round(_)),start)
