@@ -4,7 +4,7 @@
 :-dynamic(gold/1).
 :-dynamic(inStore/1).
 
-gold(0).
+gold(1000).
 
 price(gacha,1000).
 price(health_potion_s,200).

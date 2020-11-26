@@ -8,11 +8,11 @@
 maxInventory(100).
 
 /* Kategori 1 Senjata */
-item(1,archer,senjata,crossbow,0,20,0).
-item(2,archer,senjata,longbow,0,30,0).
-item(3,swordsman,senjata,haedonggum,0,20,0).
-item(4,swordsman,senjata,flamberge,0,30,0).
-item(5,sorcerer,senjata,magic_staff,0,20,0).
+item(1,archer,senjata,crossbow,0,30,0).
+item(2,archer,senjata,longbow,0,50,0).
+item(3,swordsman,senjata,haedonggum,0,30,0).
+item(4,swordsman,senjata,flamberge,0,50,0).
+item(5,sorcerer,senjata,magic_staff,0,40,0).
 
 /* Kategori 2 Armor*/
 item(6,archer,armor,lighter_armor,0,0,30).
@@ -20,24 +20,21 @@ item(7,swordsman,armor,heavy_armor,0,0,40).
 item(8,sorcerer,armor,magic_robe,0,0,35).
 
 /* Kategori 3 Potion */
-item(9,archer,potion,health_potion_s,10,0,0).
-item(10,swordsman,potion,health_potion_s,10,0,0).
-item(11,sorcerer,potion,health_potion_s,10,0,0).
-item(12,archer,potion,health_potion_m,20,0,0).
-item(13,swordsman,potion,health_potion_m,20,0,0).
-item(14,sorcerer,potion,health_potion_m,20,0,0).
-item(15,archer,potion,health_potion_l,40,0,0).
-item(16,swordsman,potion,health_potion_l,40,0,0).
-item(17,sorcerer,potion,health_potion_l,40,0,0).
-item(18,archer,potion,enhancer_attack,0,15,0).
-item(19,swordsman,potion,enhancer_attack,0,15,0).
-item(20,sorcerer,potion,enhancer_attack,0,15,0).
-item(21,archer,potion,enhancer_defense,0,0,15).
-item(22,swordsman,potion,enhancer_defense,0,0,15).
-item(23,sorcerer,potion,enhancer_defense,0,0,15).
-item(24,archer,potion,freeze_potion,0,0,0).
-item(25,swordsman,potion,freeze_potion,0,0,0).
-item(26,sorcerer,potion,freeze_potion,0,0,0).
+item(9,archer,potion,health_potion_s,50,0,0).
+item(10,swordsman,potion,health_potion_s,50,0,0).
+item(11,sorcerer,potion,health_potion_s,50,0,0).
+item(12,archer,potion,health_potion_m,100,0,0).
+item(13,swordsman,potion,health_potion_m,100,0,0).
+item(14,sorcerer,potion,health_potion_m,100,0,0).
+item(15,archer,potion,health_potion_l,300,0,0).
+item(16,swordsman,potion,health_potion_l,300,0,0).
+item(17,sorcerer,potion,health_potion_l,300,0,0).
+item(18,archer,potion,enhancer_attack,0,30,0).
+item(19,swordsman,potion,enhancer_attack,0,30,0).
+item(20,sorcerer,potion,enhancer_attack,0,30,0).
+item(21,archer,potion,enhancer_defense,0,0,30).
+item(22,swordsman,potion,enhancer_defense,0,0,30).
+item(23,sorcerer,potion,enhancer_defense,0,0,30).
 
 
 cekIsi(Length) :-
@@ -243,7 +240,7 @@ usePotions(Nama) :-
 	item(_,_,JenisIt,Nama,HP,Att,Def),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	JenisIt='potion', 
-	Hnew is Health + HP * Health /100,
+	Hnew is Health + HP * Health,
 	Anew is Attack + Att * Attack /100,
 	Dnew is Defense + Def * Defense /100,
 	Hnew > Hmax,
@@ -257,7 +254,7 @@ usePotions(Nama) :-
 	item(_,_,JenisIt,Nama,HP,Att,Def),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	JenisIt='potion', 
-	Hnew is Health + HP * Health /100,
+	Hnew is Health + HP * Health,
 	Anew is Attack + Att * Attack /100,
 	Dnew is Defense + Def * Defense /100,
 	Hnew =< Hmax,
