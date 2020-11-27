@@ -8,10 +8,8 @@ initMap:-
     asserta(lebar(11)),
     panjang(P),
     lebar(L),
-    P1 is P-3,
-    L1 is L-3,
-    random(6,P1,DX),
-    random(6,L1,DY),
+    random(8,P,DX),
+    random(8,L,DY),
     asserta(dungeon(DX,DY)),
     randomizeWall,
     initPlayer.

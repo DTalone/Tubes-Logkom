@@ -24,8 +24,9 @@ battle(A) :- adjusmentEnemy(A),
 
 bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalanan Anda!\n'),
           enemy('rajagledek',B,C,D,E),
-          asserta(round(0)),
+          asserta(round(1)),
           asserta(currEnemy('rajagledek',B,C,D,E,B)),
+          printStat,
           fight,
           retractall(currEnemy(_,_,_,_,_)),
           retractall(round(_)),
@@ -36,12 +37,11 @@ bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalana
 
 fight :-  repeat,
           turnUser,
-          round(Round), Roundnew is Round + 1,
-          retract(round(Round)), asserta(round(Roundnew)),
           currEnemy(_,W,_,_,_,_),
           (endCondition(W,2) -> asserta(victory),write('Kamu menang'),nl,!;
           kabur -> !;
-          turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,asserta(gameOver),!;fight)).
+          turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,asserta(gameOver),!;
+                                                                      round(Round), Roundnew is Round + 1, retract(round(Round)), asserta(round(Roundnew)),fight)).
 
 turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             write('1. Attack.'),nl,
@@ -65,7 +65,7 @@ turnEnemy :- character(A,B,C,D,E,F,G,H),
             asserta(character(A,Bnew,C,D,E,F,G,H)),nl,
             write('##########Giliran Musuh!##########'),nl,
             write('#    Awwww sakit banget broo!    #\n'),
-            write('##################################'),nl, nl.
+            write('##################################'),nl,nl, printStat, nl.
 
 printStat :- character(A,B,_,_,_,_,_,H),currEnemy(I,J,_,_,_,K), round(Round), B < 0,
           write('Giliran ke-'),write(Round),nl,
@@ -96,7 +96,7 @@ attack :- character(_,_,X,_,_,_,_,_),
           asserta(currEnemy(A,Bnew1,C,D,E,F)),nl,
           write('##########Giliran Anda!!##########'),nl,
           write('#    Damagenya ga nahan broo!    #\n'),
-          write('##################################'),nl.
+          write('##################################'),nl,nl.
 specialAttack :- character(_,_,Y,_,_,_,_,_),round(X),Z is X mod 3,
                 (Z =:= 0-> nl,
                   write('##########Giliran Anda!!##########'),nl,
