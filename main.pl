@@ -38,7 +38,8 @@ start :-
     asserta(quest(0,0,0,0,0)),
     (X =:= 1 -> newGame
     ;X =:= 2 -> load),
-    asserta(running(1)),!.
+    asserta(running(1)),
+    write('\nuntuk melihat perintah apa saja yang dapat digunakan silahkan mengetik \'help.\''),!.
 
 newGame :- running(_), write('Permainan sudah dimulai!'),!.
 
