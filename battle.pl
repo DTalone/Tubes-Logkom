@@ -36,11 +36,16 @@ fight :-  repeat,
           turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,asserta(gameOver),!;fight)).
 
 turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
-            write('- attack.'),nl,
-            write('- specialAttack.'),nl,
-            write('- run.'),nl,
-            write('- usePotions.'),nl,
-            read(X),X,(kabur -> write('Anda berhasil kabur!\n'),!;printStat).
+            write('1. Attack.'),nl,
+            write('2. Special Attack.'),nl,
+            write('3. Kabur.'),nl,
+            write('4. Use Potions.'),nl,
+            write('Masukkan angka : '), read(X),nl,
+            (X =:= 1 -> attack
+            ;X =:= 2 -> specialAttack
+            ;X =:= 3 -> run
+            ;X =:= 4 ->true),
+            (kabur -> write('Anda berhasil kabur!\n'),!;printStat).
 
 turnEnemy :- character(A,B,C,D,E,F,G,H),
             currEnemy(_,_,K,_,_,_),
@@ -77,8 +82,8 @@ attack :- character(_,_,X,_,_,_,_,_),
           write('serangan berhasil'),nl.
 specialAttack :- character(_,_,Y,_,_,_,_,_),round(X),Z is X mod 3, (Z =:= 0-> write('mematikan'),currEnemy(A,B,C,D,E,F),
                   Bnew is B - 2 * Y,retract(currEnemy(A,B,C,D,E,F)),asserta(currEnemy(A,Bnew,C,D,E,F)),nl;
-                  round(Round), Roundnew is Round - 1,retract(round(Round)), asserta(round(Roundnew)),fail).
-
+                  write('Serangan ini tidak bisa digunakan!\n'),fail).
+% specialAttack :- fail.
 endCondition(X,Y):- Y = 1,   X < 1, nl,!.
 endCondition(X,Y):- Y = 2,  X < 1 , nl,!.
 %

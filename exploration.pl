@@ -48,7 +48,7 @@ w :-
     retract(posisi(A,B)),
     asserta(posisi(A,B-1)),
     asserta(dungeon(1)),
-    write('Anda berada di Dungeon'),
+    write('Anda berada di Dungeon'), bossMode,
     !.
 
 w :-
@@ -131,7 +131,7 @@ a :-
     retract(posisi(A,B)),
     asserta(posisi(A-1,B)),
     asserta(dungeon(1)),
-    write('Anda berada di Dungeon'),
+    write('Anda berada di Dungeon'),bossMode,
     !.
 
 a :-
@@ -214,7 +214,7 @@ s :-
     retract(posisi(A,B)),
     asserta(posisi(A,B+1)),
     asserta(dungeon(1)),
-    write('Anda berada di Dungeon'),
+    write('Anda berada di Dungeon'),bossMode,
     !.
 
 s :-
@@ -297,7 +297,7 @@ d :-
     retract(posisi(A,B)),
     asserta(posisi(A+1,B)),
     asserta(inQuest(1)),
-    write('Anda berada di Dungeon'),
+    write('Anda berada di Dungeon'),bossMode,
     !.
 
 d :-

@@ -19,7 +19,7 @@ levelUp :- character(A,B,C,D,E,F,G,H), F >= G,
           Enew is E + 1,
           Fnew is F mod G,
           Gnew is G + E * 100,
-          retract(character(A,B,C,D,E,F,G,H)), asserta(character(A,B,Cnew,Dnew,Enew,Fnew,Gnew, Hnew)),
+          retract(character(A,B,C,D,E,F,G,H)), asserta(character(A,Hnew,Cnew,Dnew,Enew,Fnew,Gnew, Hnew)),
           write('Level up '), write(E), write(' -> '),write(Enew),nl,!.
 levelUp :-!.
 
