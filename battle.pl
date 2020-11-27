@@ -24,7 +24,10 @@ bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalana
           fight,
           retractall(currEnemy(_,_,_,_,_)),
           retractall(round(_)),
-          (victory -> write('Selamat kamu memenangkan game ini!'),nl,asserta(gameWin);asserta(gameOver),write('Game Over'),nl).
+          (victory ->
+          write('##############################################'),nl,
+          write('#     Selamat Anda memenangkan game ini!     #\n'),
+          write('##############################################'),nl,nl,asserta(gameWin);asserta(gameOver),write('Game Over'),nl).
 
 fight :-  repeat,
           turnUser,
@@ -45,14 +48,19 @@ turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             ;X =:= 2 -> specialAttack
             ;X =:= 3 -> run
             ;X =:= 4 -> cekPotions),
-            (kabur -> write('Anda berhasil kabur!\n'),!;printStat).
+            (kabur ->
+              write('################################'),nl,
+              write('#     Anda berhasil kabur!     #\n'),
+              write('################################'),nl,!;printStat).
 
 turnEnemy :- character(A,B,C,D,E,F,G,H),
             currEnemy(_,_,K,_,_,_),
             Bnew is B - K + D,
             retract(character(A,B,C,D,E,F,G,H)),
-            asserta(character(A,Bnew,C,D,E,F,G,H)),
-            write('awww enemy menyerang'), nl.
+            asserta(character(A,Bnew,C,D,E,F,G,H)),nl,
+            write('##########Giliran Musuh!##########'),nl,
+            write('#    Awwww sakit banget broo!    #\n'),
+            write('##################################'),nl, nl.
 
 printStat :- character(A,B,_,_,_,_,_,H),currEnemy(I,J,_,_,_,K), round(Round), B < 0,
           write('Giliran ke-'),write(Round),nl,
@@ -72,15 +80,23 @@ attack :- character(_,_,X,_,_,_,_,_),
           currEnemy(A,B,C,D,E,F),
           Bnew is B - X + D, Bnew < B,
           retract(currEnemy(A,B,C,D,E,F)),
-          asserta(currEnemy(A,Bnew,C,D,E,F)),
-          write('serangan berhasil'),nl.
+          asserta(currEnemy(A,Bnew,C,D,E,F)),nl,
+          write('##########Giliran Anda!!##########'),nl,
+          write('#    Damagenya ga nahan broo!    #\n'),
+          write('##################################'),nl,nl.
 attack :- character(_,_,X,_,_,_,_,_),
           currEnemy(A,B,C,D,E,F),
           Bnew is B - X + D, Bnew > B, Bnew1 is B - 10,
           retract(currEnemy(A,B,C,D,E,F)),
-          asserta(currEnemy(A,Bnew1,C,D,E,F)),
-          write('serangan berhasil'),nl.
-specialAttack :- character(_,_,Y,_,_,_,_,_),round(X),Z is X mod 3, (Z =:= 0-> write('mematikan'),currEnemy(A,B,C,D,E,F),
+          asserta(currEnemy(A,Bnew1,C,D,E,F)),nl,
+          write('##########Giliran Anda!!##########'),nl,
+          write('#    Damagenya ga nahan broo!    #\n'),
+          write('##################################'),nl.
+specialAttack :- character(_,_,Y,_,_,_,_,_),round(X),Z is X mod 3,
+                (Z =:= 0-> nl,
+                  write('##########Giliran Anda!!##########'),nl,
+                  write('#    Sakit banget Bang Jago!!    #\n'),
+                  write('##################################'),nl,currEnemy(A,B,C,D,E,F),
                   Bnew is B - 2 * Y,retract(currEnemy(A,B,C,D,E,F)),asserta(currEnemy(A,Bnew,C,D,E,F)),nl;
                   write('Serangan ini tidak bisa digunakan!\n'),fail).
 % specialAttack :- fail.
