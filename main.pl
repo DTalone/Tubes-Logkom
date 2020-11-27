@@ -65,7 +65,7 @@ help :- write('Perintah: '), nl,
         write('    w. a. s. d.         : gerak'), nl,
         write('    saveGame            : save game'), nl,
         write('    cekInventory.       : cek inventory'), nl,
-        write('    delInventory(Nama)  : membuang items dari inventory.'),
+        write('    delInventory(Nama)  : membuang items dari inventory.'),nl,
       	write('    status.             : cek status character'), nl,
       	write('    use(NamaEquip).     : memakai/mengganti senjata atau armor'), nl.
 quit :-
