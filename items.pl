@@ -282,3 +282,20 @@ cekInventory :-
 	print_list(List),
 	!.
 
+cekPotions :-
+	running(_),nl,
+	\+inventory(_,_,'potion',_,_,_,_),
+	write('Potion tidak ada'),nl,nl,
+	!.
+
+cekPotions :-
+	running(_),
+	write('Potion Pemain :'),
+	findall(Nama,inventory(_,_,'potion',Nama,_,_,_),List),
+	print_list(List),nl,
+	write('Mau pakai yang mana? '),nl, read(X),
+	usePotions(X),
+	!.
+
+
+

@@ -44,7 +44,7 @@ turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             (X =:= 1 -> attack
             ;X =:= 2 -> specialAttack
             ;X =:= 3 -> run
-            ;X =:= 4 ->true),
+            ;X =:= 4 -> cekPotions),
             (kabur -> write('Anda berhasil kabur!\n'),!;printStat).
 
 turnEnemy :- character(A,B,C,D,E,F,G,H),
