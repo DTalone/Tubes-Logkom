@@ -176,7 +176,7 @@ usePotions(Nama) :-
 	!.
 
 usePotions(Nama) :-
-	item(_,_,Nama,HP,Att,Def),
+	item(_,_,_,Nama,HP,Att,Def),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
 	Hnew is Health + HP * Health,
 	Anew is Attack + Att * Attack /100,
@@ -216,9 +216,11 @@ cekPotions :-
 
 cekPotions :-
 	running(_),
-	write('Potion Pemain :'),
+	write('###########################################'),nl,
+	write('#              POTION PEMAIN              #'),nl,
+	write('###########################################'),nl,
 	findall(Nama,inventory(_,_,'potion',Nama,_,_,_),List),
 	print_list(List),nl,
-	write('Mau pakai yang mana? '),nl, read(X),
+	write('Mau pakai yang mana? (Ketik nama potion diakhiri tanda \'.\') '),nl, read(X),
 	usePotions(X),
 	!.
