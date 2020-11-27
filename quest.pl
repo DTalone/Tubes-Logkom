@@ -25,17 +25,18 @@ quest :-
     write(' Wizard ('),write(J),write('/'),write(E),write(')'),nl,
     !.
 
-mainQuest :-  \+onQuest(_),asserta(onQuest(1)),quest(A,B,C,D,E),
+mainQuest :-  \+onQuest(_),   chapter(X), X < 5, asserta(onQuest(1)),quest(A,B,C,D,E),
               retractall(quest(A,B,C,D,E)),asserta(quest(0,0,0,0,0)), retractall(currQuest(_,_,_,_,_)),
-              chapter(X),
               Xnew is X + 1, retractall(chapter(_)), asserta(chapter(Xnew)),
               (X =:= 0 -> beforeStory1,asserta(currQuest(7,0,0,0,0))
               ;X =:= 1 -> beforeStory2,asserta(currQuest(5,7,0,0,0))
               ;X =:= 2 -> beforeStory3,asserta(currQuest(0,0,7,0,0))
               ;X =:= 3 -> beforeStory4,asserta(currQuest(0,0,0,7,0))
-              ;X =:= 4 -> beforeStory5,asserta(currQuest(0,0,0,0,7))
-              ;X =:= 5 -> beforeBoss).
+              ;X =:= 4 -> beforeStory5,asserta(currQuest(0,0,0,0,7))),!.
 
+mainQuest:- chapter(X), X =:= 5 , write('\nSilahkan mengunjungi Dungeon\n'),!.
+
+mainQuest :- write('\nAnda sedang menjalankan quest.\n'),!.
 
 dailyQuest :- \+onQuest(_),asserta(onQuest(2)),currQuest(A,B,C,D,E),
               retractall(currQuest(A,B,C,D,E)),
@@ -49,7 +50,8 @@ dailyQuest :- \+onQuest(_),asserta(onQuest(2)),currQuest(A,B,C,D,E),
               (X =:= 1 -> daily1,!
               ;X =:= 2 -> daily2,!
               ;X =:= 2 -> daily3,!
-              ;write('Pilihan tidak ada'),nl,fail).
+              ;write('Pilihan tidak ada'),nl,fail),!.
+dailyQuest :- write('\nAnda sedang menjalankan quest.\n'),!.
 
 daily1 :- write('Slime dan Goblin adalah sahabat sejak kecil!'),nl,
           write('Taklukan 2 Slime dan 2 Goblin'),nl,

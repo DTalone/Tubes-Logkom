@@ -22,7 +22,7 @@ battle(A) :- adjusmentEnemy(A),
           asserta(gold(Gnew)),
           levelUp,!.
 
-bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalanan Anda!\n'),
+bossMode:- \+onQuest(_), chapter(X), X =:= 5, write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalanan Anda!\n'),
           enemy('rajagledek',B,C,D,E),
           asserta(round(1)),
           asserta(currEnemy('rajagledek',B,C,D,E,B)),
@@ -33,7 +33,9 @@ bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalana
           (victory ->
           write('##############################################'),nl,
           write('#     Selamat Anda memenangkan game ini!     #'),nl,
-          write('##############################################'),nl,nl,asserta(gameWin);asserta(gameOver),write('Game Over'),nl,quit).
+          write('##############################################'),nl,nl,asserta(gameWin);asserta(gameOver),write('Game Over'),nl,quit),!.
+
+bossMode:- chapter(X), X < 5, write('\nAnda belum bisa melawan Boss!\n'),!.
 
 fight :-  repeat,
           turnUser,
@@ -61,7 +63,7 @@ turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
 turnEnemy :- character(A,B,C,D,E,F,G,H),
             currEnemy(_,_,K,_,_,_),
             Bnew is B - K + D,
-            (Bnew > B -> Bneww is B - K, 
+            (Bnew > B -> Bneww is B - K,
                          retract(character(A,B,C,D,E,F,G,H)),
                          asserta(character(A,Bneww,C,D,E,F,G,H))
                          ; retract(character(A,B,C,D,E,F,G,H)),
