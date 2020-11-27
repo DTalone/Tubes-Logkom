@@ -130,5 +130,5 @@ endCondition(X,Y):- Y = 2,  X < 1 , nl,!.
 % usePotions :-
 %
 
-run :- random(1,100,X),  retractall(kabur),nl,
+run :- running(_), round(_), random(1,100,X),  retractall(kabur),nl,
     ( X < 25 -> asserta(kabur),!;write('Anda tidak berhasil kabur!\n')).

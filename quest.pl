@@ -9,11 +9,13 @@ startQuest:- write('\nSelamat datang di Quest\n'),
               ;X =:= 2 -> dailyQuest).
 
 quest :-
+    running(_),
     \+(currQuest(_,_,_,_,_)),nl,
     write('Anda tidak sedang menjalani quest'),
     !.
 
 quest :-
+    running(_),
     (currQuest(_,_,_,_,_)),
     currQuest(A,B,C,D,E),
     quest(F,G,H,I,J),
