@@ -63,11 +63,11 @@ help :- write('Perintah: '), nl,
         write('    help.               : melihat perintah yang dapat digunakan'), nl,
         write('    map.                : melihat map'),nl,
         write('    w. a. s. d.         : gerak'), nl,
-        write('    saveGame(Filename). : save game'), nl,
-        write('    loadGame(Filename). : load game'), nl,
-	write('    cekInventory.       : cek inventory'), nl,
-	write('    usePotions(Nama).   : menggunakan potion'), nl,
-	write('    use(NamaEquip).     : memakai/mengganti senjata atau armor'), nl.
+        write('    saveGame            : save game'), nl,
+        write('    cekInventory.       : cek inventory'), nl,
+        write('    delInventory(Nama)  : membuang items dari inventory.'),
+      	write('    status.             : cek status character'), nl,
+      	write('    use(NamaEquip).     : memakai/mengganti senjata atau armor'), nl.
 quit :-
     \+running(_),
     write('Permainan belum dimulai!'),!.

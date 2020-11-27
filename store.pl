@@ -1,9 +1,6 @@
 /* File : store.pl */
 
-:-dynamic(gold/1).
 :-dynamic(inStore/1).
-
-gold(1000).
 
 price(gacha,1000).
 price(health_potion_s,200).
@@ -34,7 +31,7 @@ store :-
     	write('2. Health Potion S (200 gold)'),nl,
     	write('3. Health Potion M (500 gold)'),nl,
     	write('4. Health Potion L (1000 gold) '),nl,
-    	write('5. Enhancer Attack (750 gold)'),nl,	
+    	write('5. Enhancer Attack (750 gold)'),nl,
     	write('6. Enhancer Defense (750 gold)'),nl,
 	write('7. Keluar'),nl,nl,
 	write('Masukkan angka : '),read(X),
@@ -47,7 +44,7 @@ store :-
 	;X =:= 7 -> exitStore),
 	!.
 
-gacha :- 
+gacha :-
 	gold(G),
 	G >= 1000,
 	Gnew is G - 1000,
@@ -96,7 +93,7 @@ health_potion_m :-
 health_potion_m :-
 	gold(G),
 	G < 500,nl,nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,	
+	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
 	!.
 
 health_potion_l :-
