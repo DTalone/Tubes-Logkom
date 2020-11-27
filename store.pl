@@ -58,7 +58,7 @@ gacha :-
 	write('Pembelian berhasil'),nl,
 	write('Kamu mendapatkan equipment : '),
 	write(Equip),nl,
-	addInventory(equip),nl,nl,
+	addInventory(Equip),nl,nl,
 	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
@@ -167,5 +167,4 @@ exitStore :-
 exitStore :-
 	inStore(_),nl,nl,
 	write('Terimakasih atas kehadirannya.'),nl,
-	retractall(inStore(_)),
 	!.
