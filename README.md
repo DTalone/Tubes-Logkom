@@ -20,7 +20,7 @@ Disusun oleh Grup 11 Kelas 01 :
 2. Buka menu file yang ada di pojok kanan atas lalu pilih, consult
 3. Cari direktori tempat Anda menyimpan file ini, lalu pilih file main.pl
  ```sh
-../main.pl compiled, 1559 lines read - 244492 bytes written, 52 ms
+../main.pl compiled, 1647 lines read - 260235 bytes written, 63 ms
 ```
 4. Apabila telah muncul tulisan tersebut maka program dapat langsung dijalankan dengan mengetikkan 'start.'
 ```sh
