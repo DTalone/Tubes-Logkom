@@ -31,8 +31,8 @@ bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalana
           retractall(round(_)),
           (victory ->
           write('##############################################'),nl,
-          write('#     Selamat Anda memenangkan game ini!     #\n'),
-          write('##############################################'),nl,nl,asserta(gameWin);asserta(gameOver),write('Game Over'),nl).
+          write('#     Selamat Anda memenangkan game ini!     #'),nl,
+          write('##############################################'),nl,nl,asserta(gameWin);asserta(gameOver),write('Game Over'),nl,quit).
 
 fight :-  repeat,
           turnUser,
