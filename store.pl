@@ -19,11 +19,13 @@ random_equip(7,heavy_armor).
 random_equip(8,magic_robe).
 
 store :-
+	running(_),
 	\+inStore(_),nl,nl,
 	write('Kamu masih terlalu jauh dari store.'),
 	!.
 
 store :-
+	running(_),
 	inStore(_),
 	nl,nl,
 	write('##################  STORE  ##################'),nl,

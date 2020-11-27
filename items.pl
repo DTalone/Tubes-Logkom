@@ -57,22 +57,26 @@ addInventory(Nama) :-
 	write('Item berhasil disimpan ke dalam inventory.'),!.
 
 delInventory(Nama) :-
+	running(_),
 	\+inventory(_,_,_,Nama,_,_,_),nl,
 	write('Tidak ada item tersebut di inventory Anda.'),nl,
 	!.
 
 delInventory(Nama) :-
+	running(_),
 	retract(inventory(_,_,_,Nama,_,_,_)),nl,
 	write(Nama),
 	write(' berhasil dihapus dari inventory.'),nl,
 	!.
 
 use(Nama) :-
+	running(_),
 	\+inventory(_,_,_,Nama,_,_,_),nl,
 	write('Tidak ada item tersebut di inventory Anda.'),nl,
 	!.
 
 use(Nama) :-
+	running(_),
 	item(_,Pengguna,_,Nama,_,_,_),
 	character(Jenis,_,_,_,_,_,_,_),
 	Jenis \== Pengguna,nl,
@@ -80,6 +84,7 @@ use(Nama) :-
 	!.
 
 use(Nama) :-
+	running(_),
 	\+senjata(_),
 	item(_,Pengguna,JenisIt,Nama,_,Att,_),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
@@ -96,6 +101,7 @@ use(Nama) :-
 	!.
 
 use(Nama) :-
+	running(_),
 	senjata(Cur),
 	item(_,Pengguna,JenisIt,Nama,_,Att,Def),
 	item(_,_,_,Cur,_,AttCur,_),
@@ -115,6 +121,7 @@ use(Nama) :-
 	!.
 
 use(Nama) :-
+	running(_),
 	\+armor(_),
 	item(_,Pengguna,JenisIt,Nama,_,_,Def),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
@@ -131,6 +138,7 @@ use(Nama) :-
 	!.
 
 use(Nama) :-
+	running(_),
 	armor(Cur),
 	item(_,Pengguna,JenisIt,Nama,_,Att,Def),
 	item(_,_,_,Cur,_,_,DefCur),

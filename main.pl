@@ -57,7 +57,8 @@ newGame:- write('Siapakah nama kamu? (tulis di antara tanda petik dan diakhiri t
           story0,
           !.
 
-help :- write('Perintah: '), nl,
+help :- running(_),
+        write('Perintah: '), nl,
         write('    start.              : mulai permainan'), nl,
         write('    quit.               : keluar permainan'), nl,
         write('    help.               : melihat perintah yang dapat digunakan'), nl,
@@ -68,7 +69,7 @@ help :- write('Perintah: '), nl,
         write('    quest.              : cek progress quest'), nl,
         write('    cekInventory.       : cek inventory'), nl,
       	write('    use(NamaEquip).     : memakai/mengganti senjata atau armor'), nl,
-        write('    delInventory(Inv)   : membuang items dari inventory.'),nl.
+        write('    delInventory(Inv)   : membuang items dari inventory.'),nl,!.
 quit :-
     \+running(_),
     write('Permainan belum dimulai!'),!.
@@ -99,6 +100,7 @@ quit :- retract(running(1)),
         !.
         % sleep(5),
         % halt.
+
 saveGame :-
 	\+running(_),
 	write('Perintah ini hanya bisa dipakai setelah pemainan dimulai.'), nl,
