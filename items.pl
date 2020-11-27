@@ -70,7 +70,7 @@ delInventory(Nama) :-
 use(Nama) :-
 	\+inventory(_,_,_,Nama,_,_,_),nl,
 	write('Tidak ada item tersebut di inventory Anda.'),nl,
-	!,fail.
+	!.
 
 use(Nama) :-
 	item(_,Pengguna,_,Nama,_,_,_),
@@ -81,154 +81,53 @@ use(Nama) :-
 
 use(Nama) :-
 	\+senjata(_),
-	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
+	item(_,Pengguna,JenisIt,Nama,_,Att,_),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	Jenis=Pengguna,
-	JenisIt='senjata',
-	Weapon is Nama,
-	Hnew is Health + HP,
+	Jenis==Pengguna,
+	JenisIt=='senjata',
+	Hnew is Health,
 	Anew is Attack + Att,
-	Dnew is Defense + Def,
-	Hnew > Hmax,
+	Dnew is Defense,
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
-	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
-	asserta(senjata(Weapon)),nl,nl,
+	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
+	asserta(senjata(Nama)),nl,
 	write('Berhasil memakai senjata'),nl,
 	!.
 
 use(Nama) :-
 	senjata(Cur),
-	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
+	item(_,Pengguna,JenisIt,Nama,_,Att,Def),
 	item(_,_,_,Cur,_,AttCur,_),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	Jenis=Pengguna,
-	JenisIt='senjata',
-	Weapon is Nama,
-	Hnew is Health + HP,
+	Jenis==Pengguna,
+	JenisIt=='senjata',
+	Hnew is Health,
 	Anew is Attack + Att - AttCur,
 	Dnew is Defense + Def,
-	Hnew > Hmax,
-	retract(senjata(_)),
-	retract(inventory(_,_,_,Nama,_,_,_)),
-	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
-	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
-	asserta(senjata(Weapon)),nl,nl,
-	write('Berhasil mengganti senjata'),nl,
-	!.
-
-use(Nama) :-
-	\+senjata(_),
-	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
-	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	Jenis=Pengguna,
-	JenisIt='senjata',
-	Weapon is Nama,
-	Hnew is Health + HP,
-	Anew is Attack + Att,
-	Dnew is Defense + Def,
-	Hnew =< Hmax,
-	retract(inventory(_,_,_,Nama,_,_,_)),
-	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
-	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
-	asserta(senjata(Weapon)),nl,nl,
-	write('Berhasil memakai senjata'),nl,
-	!.
-
-use(Nama) :-
-	senjata(Cur),
-	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
-	item(_,_,_,Cur,_,AttCur,_),
-	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	Jenis=Pengguna,
-	JenisIt='senjata',
-	Weapon is Nama,
-	Hnew is Health + HP,
-	Anew is Attack + Att - AttCur,
-	Dnew is Defense + Def,
-	Hnew =< Hmax,
 	retract(senjata(_)),
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
-	asserta(senjata(Weapon)),nl,nl,
+	asserta(inventory(_,_,_,Cur,_,_,_)),
+	asserta(senjata(Nama)),nl,
 	write('Berhasil mengganti senjata'),nl,
 	!.
 
 use(Nama) :-
 	\+armor(_),
-	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
+	item(_,Pengguna,JenisIt,Nama,_,_,Def),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	Jenis=Pengguna,
-	JenisIt='armor',
-	Ar is Nama,
-	Hnew is Health + HP,
-	Anew is Attack + Att,
+	Jenis==Pengguna,
+	JenisIt=='armor',
+	Hnew is Health,
+	Anew is Attack,
 	Dnew is Defense + Def,
-	Hnew > Hmax,
-	retract(inventory(_,_,_,Nama,_,_,_)),
-	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
-	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
-	asserta(armor(Ar)),nl,nl,
-	write('Berhasil memakai armor'),nl,
-	!.
-
-use(Nama) :-
-	armor(Cur),
-	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
-	item(_,_,_,Cur,_,_,DefCur),
-	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	Jenis=Pengguna,
-	JenisIt='armor',
-	Ar is Nama,
-	Hnew is Health + HP,
-	Anew is Attack + Att,
-	Dnew is Defense + Def - DefCur,
-	Hnew > Hmax,
-	retract(armor(_)),
-	retract(inventory(_,_,_,Nama,_,_,_)),
-	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
-	asserta(character(Jenis,Hmax,Anew,Dnew,E,F,G,Hmax)),
-	asserta(armor(Ar)),nl,nl,
-	write('Berhasil mengganti armor'),nl,
-	!.
-
-use(Nama) :-
-	\+armor(_),
-	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
-	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	Jenis=Pengguna,
-	JenisIt='armor',
-	Ar is Nama,
-	Hnew is Health + HP,
-	Anew is Attack + Att,
-	Dnew is Defense + Def,
-	Hnew =< Hmax,
 	retract(inventory(_,_,_,Nama,_,_,_)),
 	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
 	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
-	asserta(armor(Ar)),nl,nl,
+	asserta(armor(Nama)),nl,
 	write('Berhasil memakai armor'),nl,
-	!.
-
-use(Nama) :-
-	armor(Cur),
-	item(_,Pengguna,JenisIt,Nama,HP,Att,Def),
-	item(_,_,_,Cur,_,_,DefCur),
-	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	Jenis=Pengguna,
-	JenisIt='armor',
-	Ar is Nama,
-	Hnew is Health + HP,
-	Anew is Attack + Att,
-	Dnew is Defense + Def - DefCur,
-	Hnew =< Hmax,
-	retract(armor(_)),
-	retract(inventory(_,_,_,Nama,_,_,_)),
-	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
-	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
-	asserta(armor(Ar)),nl,nl,
-	write('Berhasil mengganti senjata'),nl,
 	!.
 
 usePotions(Nama) :-
@@ -237,9 +136,8 @@ usePotions(Nama) :-
 	!,fail.
 
 usePotions(Nama) :-
-	item(_,_,JenisIt,Nama,HP,Att,Def),
+	item(_,_,_,Nama,HP,Att,Def),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	JenisIt='potion',
 	Hnew is Health + HP * Health,
 	Anew is Attack + Att * Attack /100,
 	Dnew is Defense + Def * Defense /100,
@@ -251,9 +149,8 @@ usePotions(Nama) :-
 	!.
 
 usePotions(Nama) :-
-	item(_,_,JenisIt,Nama,HP,Att,Def),
+	item(_,_,Nama,HP,Att,Def),
 	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
-	JenisIt='potion',
 	Hnew is Health + HP * Health,
 	Anew is Attack + Att * Attack /100,
 	Dnew is Defense + Def * Defense /100,
