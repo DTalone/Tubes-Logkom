@@ -110,27 +110,11 @@ specialAttack :- character(_,_,Y,_,_,_,_,_),round(X),Z is X mod 3,
                   write('##################################'),nl,currEnemy(A,B,C,D,E,F),
                   Bnew is B - 2 * Y,retract(currEnemy(A,B,C,D,E,F)),asserta(currEnemy(A,Bnew,C,D,E,F)),nl;
                   write('Serangan ini tidak bisa digunakan!\n'),fail).
-% specialAttack :- fail.
+
+
 endCondition(X,Y):- Y = 1,   X < 1, nl,!.
 endCondition(X,Y):- Y = 2,  X < 1 , nl,!.
-%
-% attack :-
-%
-%
-% attack :-
-%
 
-% specialAttack :-
-%
-%
-% specialAttack :-
-%
-% usePotions :-
-%
-% usePotions :-
-%
-% usePotions :-
-%
 
 run :- running(_), round(_), random(1,100,X),  retractall(kabur),nl,
     ( X < 25 -> asserta(kabur),!;write('Anda tidak berhasil kabur!\n')).
