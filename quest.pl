@@ -1,5 +1,5 @@
 :- dynamic(currQuest/5).
-
+% pada saat menduduki posisi quest
 startQuest:- write('\nSelamat datang di Quest\n'),
              write('Pilihan quest\n'),
              write('1. Main Quest.\n'),
@@ -8,12 +8,12 @@ startQuest:- write('\nSelamat datang di Quest\n'),
              (X =:= 1  -> mainQuest
               ;X =:= 2 -> dailyQuest).
 
+% menampilkan statistik quest yang diambil
 quest :-
     running(_),
     \+(currQuest(_,_,_,_,_)),nl,
     write('Anda tidak sedang menjalani quest'),
     !.
-
 quest :-
     running(_),
     (currQuest(_,_,_,_,_)),
@@ -26,7 +26,7 @@ quest :-
     write(' Wolf ('),write(I),write('/'),write(D),write(')'),nl,
     write(' Wizard ('),write(J),write('/'),write(E),write(')'),nl,
     !.
-
+% main quest
 mainQuest :-  \+onQuest(_),   chapter(X), X < 5, asserta(onQuest(1)),quest(A,B,C,D,E),
               retractall(quest(A,B,C,D,E)),asserta(quest(0,0,0,0,0)), retractall(currQuest(_,_,_,_,_)),
               Xnew is X + 1, retractall(chapter(_)), asserta(chapter(Xnew)),
@@ -39,7 +39,7 @@ mainQuest :-  \+onQuest(_),   chapter(X), X < 5, asserta(onQuest(1)),quest(A,B,C
 mainQuest:- chapter(X), X =:= 5 , write('\nSilahkan mengunjungi Dungeon\n'),!.
 
 mainQuest :- write('\nAnda sedang menjalankan quest.\n'),!.
-
+% daily quest
 dailyQuest :- \+onQuest(_),asserta(onQuest(2)),currQuest(A,B,C,D,E),
               retractall(currQuest(A,B,C,D,E)),
               repeat,
@@ -73,11 +73,11 @@ daily3 :- write('Slime, Goblin, Golem, dan Wolf adalah golongan ras monster prib
           write('Taklukan 4 Slime, 4 Goblin, 4 Golem, dan 4 Wolf'),nl,
           retractall(daily(_)), asserta(daily(3)),
           asserta(currQuest(4,4,4,4,0)).
-
+% memeriksa apakah quest sudah terlaksana atau kurang
 cekQuest :- onQuest(_), quest(A,B,C,D,E), currQuest(F,G,H,I,J), A >= F, B >= G, C >= H, D >= I, E >= J,
             onQuest(X), (X =:= 1 -> chapter(Y);daily(Y)),
             collect(X,Y), retract(currQuest(F,G,H,I,J)),!.
-
+% mengambil bonus dari pengerjaan quest
 collect(A,B) :- character(AA,BB,C,D,E,F,G,H), gold(X),
                 (A =:= 1 , B =:= 1 -> Fnew is F + 300, Xnew is X + 500,
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
@@ -108,7 +108,7 @@ collect(A,B) :- character(AA,BB,C,D,E,F,G,H), gold(X),
 
 
 
-% Cerita cerita
+% Cerita cerita yang terdapat
 story0 :- nama(Username),
           write('######################################################################'),nl,
           write('Emprit Kingdom adalah kerajaan yang makmur dan sejahtera.'),nl,

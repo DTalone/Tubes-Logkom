@@ -2,13 +2,7 @@
 
 :-dynamic(inStore/1).
 
-price(gacha,1000).
-price(health_potion_s,200).
-price(health_potion_m,500).
-price(health_potion_l,1000).
-price(enhancer_attack,750).
-price(enhancer_defense,750).
-
+/* untuk random saat pembelian gacha */
 random_equip(1,crossbow).
 random_equip(2,longbow).
 random_equip(3,haedonggum).
@@ -18,12 +12,14 @@ random_equip(6,lighter_armor).
 random_equip(7,heavy_armor).
 random_equip(8,magic_robe).
 
+/* pemain belum di store */
 store :-
 	running(_),
 	\+inStore(_),nl,nl,
 	write('Kamu masih terlalu jauh dari store.'),
 	!.
 
+/* pemain sudah di store */
 store :-
 	running(_),
 	inStore(_),
@@ -50,6 +46,7 @@ store :-
 	;X =:= 7 -> exitStore),
 	!.
 
+/* melakukan random pada saat pembelian gacha berhasil */
 gacha :-
 	gold(G),
 	G >= 1000,
@@ -64,12 +61,14 @@ gacha :-
 	addInventory(Equip),nl,nl,
 	!.
 
+/* gold tidak cukup */
 gacha :-
 	gold(G),
 	G < 1000,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
 	!.
 
+/* pembelian berhasil saat gold mencukupi*/
 health_potion_s :-
 	gold(G),
 	G >= 200,
@@ -80,12 +79,14 @@ health_potion_s :-
 	addInventory(health_potion_s),nl,nl,
 	!.
 
+/* gold tidak cukup */
 health_potion_s :-
 	gold(G),
 	G < 200,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
 	!.
 
+/* pembelian berhasil saat gold mencukupi*/
 health_potion_m :-
 	gold(G),
 	G >= 500,
@@ -96,12 +97,14 @@ health_potion_m :-
 	addInventory(health_potion_m),nl,nl,
 	!.
 
+/* gold tidak cukup */
 health_potion_m :-
 	gold(G),
 	G < 500,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
 	!.
 
+/* pembelian berhasil saat gold mencukupi*/
 health_potion_l :-
 	gold(G),
 	G >= 1000,
@@ -112,12 +115,14 @@ health_potion_l :-
 	addInventory(health_potion_l),nl,nl,
 	!.
 
+/* gold tidak cukup */
 health_potion_l :-
 	gold(G),
 	G < 1000,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
 	!.
 
+/* pembelian berhasil saat gold mencukupi*/
 enhancer_attack :-
 	gold(G),
 	G >= 750,
@@ -128,12 +133,14 @@ enhancer_attack :-
 	addInventory(enhancer_attack),nl,nl,
 	!.
 
+/* gold tidak cukup */
 enhancer_attack :-
 	gold(G),
 	G < 750,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
 	!.
 
+/* pembelian berhasil saat gold mencukupi*/
 enhancer_defense :-
 	gold(G),
 	G >= 750,
@@ -144,6 +151,7 @@ enhancer_defense :-
 	addInventory(enhancer_defense),nl,nl,
 	!.
 
+/* gold tidak cukup */
 enhancer_defense :-
 	gold(G),
 	G < 750,nl,nl,
@@ -155,6 +163,7 @@ exitStore :-
 	write('Pemain tidak berada di dalam store.'),nl,
 	!.
 
+/* keluar dari store */
 exitStore :-
 	inStore(_),nl,nl,
 	write('Terimakasih atas kehadirannya.'),nl,

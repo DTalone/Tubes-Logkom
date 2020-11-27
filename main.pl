@@ -18,7 +18,7 @@
 :- include('quest.pl').
 :- include('battle.pl').
 :- include('store.pl').
-
+%memulai permainan
 start :-
     running(_),
     write('Permainan sudah dimulai!'),!.
@@ -41,7 +41,7 @@ start :-
     ;X =:= 2 -> loadGame),
     asserta(running(1)),
     write('\nuntuk melihat perintah apa saja yang dapat digunakan silahkan mengetik \'help.\''),!.
-
+% new game
 newGame :- running(_), write('Permainan sudah dimulai!'),!.
 
 newGame:- write('Siapakah nama kamu? (tulis di antara tanda petik dan diakhiri titik. Contoh: \'Silvanna\'.)'),nl,
@@ -56,7 +56,7 @@ newGame:- write('Siapakah nama kamu? (tulis di antara tanda petik dan diakhiri t
           initMap,
           story0,
           !.
-
+% menampilkan perintah yang dapat digunakan
 help :- running(_),
         write('Perintah: '), nl,
         write('    start.              : mulai permainan'), nl,
@@ -70,6 +70,7 @@ help :- running(_),
         write('    cekInventory.       : cek inventory'), nl,
       	write('    use(NamaEquip).     : memakai/mengganti senjata atau armor'), nl,
         write('    delInventory(Inv)   : membuang items dari inventory.'),nl,!.
+%quit permainan
 quit :-
     \+running(_),
     write('Permainan belum dimulai!'),!.
@@ -98,9 +99,8 @@ quit :- retract(running(1)),
         retractall(lebar(_)),
         write('Terima kasih telah bermain'),nl,
         !.
-        % sleep(5),
-        % halt.
 
+% save permainan
 saveGame :-
 	\+running(_),
 	write('Perintah ini hanya bisa dipakai setelah pemainan dimulai.'), nl,
@@ -144,7 +144,7 @@ saveGame :-
         told,
         write('File telah disimpan dengan nama : '), write(FileName),
         !.
-
+%load permainan
 loadGame :-
 	running(_),
 	write('Kamu sudah memulai permainan.'), nl, !.
