@@ -13,9 +13,9 @@ initChar :- write('Role yang tersedia'),nl,
             X =:= 2 ->asserta(character('swordsman', 700,130,60,1,0,300,700));
               X =:= 3 ->asserta(character('sorcerer', 600,160,40,1,0,300,600))).
 levelUp :- character(A,B,C,D,E,F,G,H), F >= G,
-          Hnew is H + 100 * E,
-          Cnew is C + 50 * E,
-          Dnew is D + 30 * E,
+          Hnew is H + 43 * E,
+          Cnew is C + 8 * E,
+          Dnew is D + 4 * E,
           Enew is E + 1,
           Fnew is F mod G,
           Gnew is G + E * 100,

@@ -29,11 +29,11 @@ mainQuest :-  \+onQuest(_),asserta(onQuest(1)),quest(A,B,C,D,E),
               retractall(quest(A,B,C,D,E)),asserta(quest(0,0,0,0,0)), retractall(currQuest(_,_,_,_,_)),
               chapter(X),
               Xnew is X + 1, retractall(chapter(_)), asserta(chapter(Xnew)),
-              (X =:= 0 -> beforeStory1,asserta(currQuest(10,0,0,0,0))
-              ;X =:= 1 -> beforeStory2,asserta(currQuest(5,10,0,0,0))
-              ;X =:= 2 -> beforeStory3,asserta(currQuest(0,0,10,0,0))
-              ;X =:= 3 -> beforeStory4,asserta(currQuest(0,0,0,10,0))
-              ;X =:= 4 -> beforeStory5,asserta(currQuest(0,0,0,0,10))
+              (X =:= 0 -> beforeStory1,asserta(currQuest(7,0,0,0,0))
+              ;X =:= 1 -> beforeStory2,asserta(currQuest(5,7,0,0,0))
+              ;X =:= 2 -> beforeStory3,asserta(currQuest(0,0,7,0,0))
+              ;X =:= 3 -> beforeStory4,asserta(currQuest(0,0,0,7,0))
+              ;X =:= 4 -> beforeStory5,asserta(currQuest(0,0,0,0,7))
               ;X =:= 5 -> beforeBoss).
 
 

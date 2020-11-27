@@ -21,37 +21,42 @@ statusEnemy :- enemy(A,B,C,D,E),
 
 adjusmentEnemy(X):- X = slime, character(_,_,_,_,E,_,_,_),
             enemy(X, F,G,H,I),
-            Ben is F + 70 * (E - I),
-            Cen is G + 50 * (E - I),
-            Den is H + 30 * (E - I),
+            Ben is F + 47 * (E - I), %70
+            Cen is G + 9 * (E - I), %50
+            Den is H + 4 * (E - I), %30
+            Inew is E,
             retract(enemy(X,F,G,H,I)),
-            asserta(enemy(X, Ben,Cen,Den,I)),!.
+            asserta(enemy(X, Ben,Cen,Den,Inew)),!.
 
 adjusmentEnemy(X):- X = goblin, character(_,_,_,_,E,_,_,_),
             enemy(X, F,G,H,I),
-            Ben is F + 100 * (E - I),
-            Cen is G + 70 * (E - I),
-            Den is H + 40 * (E - I),
+            Ben is F + 48 * (E - I), %100
+            Cen is G + 9 * (E - I), %70
+            Den is H + 4 * (E - I), %40
+            Inew is E,
             retract(enemy(X,F,G,H,I)),
-            asserta(enemy(X, Ben,Cen,Den,I)),!.
+            asserta(enemy(X, Ben,Cen,Den,Inew)),!.
 adjusmentEnemy(X):- X = wolf, character(_,_,_,_,E,_,_,_),
             enemy(X, F,G,H,I),
-            Ben is F + 130 * (E - I),
-            Cen is G + 90 * (E - I),
-            Den is H + 50 * (E - I),
+            Ben is F + 47 * (E - I), %130
+            Cen is G + 8 * (E - I), %90
+            Den is H + 4 * (E - I), %50
+            Inew is E,
             retract(enemy(X,F,G,H,I)),
-            asserta(enemy(X, Ben,Cen,Den,I)),!.
+            asserta(enemy(X, Ben,Cen,Den,Inew)),!.
 adjusmentEnemy(X):- X = golem, character(_,_,_,_,E,_,_,_),
             enemy(X, F,G,H,I),
-            Ben is F + 160 * (E - I),
-            Cen is G + 100 * (E - I),
-            Den is H + 60 * (E - I),
+            Ben is F + 46 * (E - I), %160
+            Cen is G + 9 * (E - I), %100
+            Den is H + 3 * (E - I), %60
+            Inew is E,
             retract(enemy(X,F,G,H,I)),
-            asserta(enemy(X, Ben,Cen,Den,I)),!.
+            asserta(enemy(X, Ben,Cen,Den,Inew)),!.
 adjusmentEnemy(X):- X = wizard, character(_,_,_,_,E,_,_,_),
             enemy(X, F,G,H,I),
-            Ben is F + 190 * (E - I),
-            Cen is G + 120 * (E - I),
-            Den is H + 70 * (E - I),
+            Ben is F + 45 * (E - I), %190
+            Cen is G + 8 * (E - I), %120
+            Den is H + 4 * (E - I), %70
+            Inew is E,
             retract(enemy(X,F,G,H,I)),
-            asserta(enemy(X, Ben,Cen,Den,I)),!.
+            asserta(enemy(X, Ben,Cen,Den,Inew)),!.
