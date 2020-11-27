@@ -130,6 +130,25 @@ use(Nama) :-
 	write('Berhasil memakai armor'),nl,
 	!.
 
+use(Nama) :-
+	armor(Cur),
+	item(_,Pengguna,JenisIt,Nama,_,Att,Def),
+	item(_,_,_,Cur,_,_,DefCur),
+	character(Jenis,Health,Attack,Defense,E,F,G,Hmax),
+	Jenis==Pengguna,
+	JenisIt=='armor',
+	Hnew is Health,
+	Anew is Attack + Att,
+	Dnew is Defense + Def - DefCur,
+	retract(armor(_)),
+	retract(inventory(_,_,_,Nama,_,_,_)),
+	retract(character(Jenis,Health,Attack,Defense,E,F,G,Hmax)),
+	asserta(character(Jenis,Hnew,Anew,Dnew,E,F,G,Hmax)),
+	asserta(inventory(_,_,_,Cur,_,_,_)),
+	asserta(armor(Nama)),nl,
+	write('Berhasil mengganti armor'),nl,
+	!.
+
 usePotions(Nama) :-
 	\+inventory(_,_,_,Nama,_,_,_),
 	write('Tidak ada item tersebut di inventory Anda.'),

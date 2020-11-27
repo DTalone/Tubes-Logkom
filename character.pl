@@ -23,7 +23,7 @@ levelUp :- character(A,B,C,D,E,F,G,H), F >= G,
           write('Level up '), write(E), write(' -> '),write(Enew),nl,!.
 levelUp :-!.
 
-status :- character(A,B,C,D,E,F,G,H),gold(Gold),
+status :- character(A,B,C,D,E,F,G,H),gold(Gold),\+senjata(_),\+armor(_),
           write('Job      : '), write(A),nl,
           write('HP       : '), write(B),write('/'),write(H),nl,
           write('Attack   : '), write(C),nl,
@@ -31,3 +31,34 @@ status :- character(A,B,C,D,E,F,G,H),gold(Gold),
           write('Level    : '), write(E),nl,
           write('Exp      : '), write(F),write('/'),write(G),nl,
           write('Gold     : '), write(Gold),nl,!.
+
+status :- character(A,B,C,D,E,F,G,H),gold(Gold),senjata(Senjata),\+armor(_),
+          write('Job      : '), write(A),nl,
+          write('HP       : '), write(B),write('/'),write(H),nl,
+          write('Attack   : '), write(C),nl,
+          write('Defense  : '), write(D),nl,
+          write('Level    : '), write(E),nl,
+          write('Exp      : '), write(F),write('/'),write(G),nl,
+          write('Gold     : '), write(Gold),nl,
+	  write('Senjata  : '), write(Senjata),nl,!.
+
+status :- character(A,B,C,D,E,F,G,H),gold(Gold),\+senjata(_),armor(Armor),
+          write('Job      : '), write(A),nl,
+          write('HP       : '), write(B),write('/'),write(H),nl,
+          write('Attack   : '), write(C),nl,
+          write('Defense  : '), write(D),nl,
+          write('Level    : '), write(E),nl,
+          write('Exp      : '), write(F),write('/'),write(G),nl,
+          write('Gold     : '), write(Gold),nl,
+	  write('Armor    : '), write(Armor),nl,!.
+
+status :- character(A,B,C,D,E,F,G,H),gold(Gold),senjata(Senjata),armor(Armor),
+          write('Job      : '), write(A),nl,
+          write('HP       : '), write(B),write('/'),write(H),nl,
+          write('Attack   : '), write(C),nl,
+          write('Defense  : '), write(D),nl,
+          write('Level    : '), write(E),nl,
+          write('Exp      : '), write(F),write('/'),write(G),nl,
+          write('Gold     : '), write(Gold),nl,
+	  write('Senjata  : '), write(Senjata),nl,
+	  write('Armor    : '), write(Armor),nl,!.
