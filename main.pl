@@ -100,9 +100,39 @@ saveGame(_) :-
 	write('Gunakan perintah "start." untuk memulai permainan.'), nl, !.
 
 saveGame(FileName) :-
-    nama(Username),
         tell(FileName),
-            write('nama('), write(Username),write(').'),nl,
+            nama(Username),
+            write(nama(Username)),write('.'),nl,
+            gold(Gold),
+            write(gold(Gold)),write('.'),nl,
+            character(Jenis, HP, Attack, Defense, Level, Exp, MaxExp, MaxHP),
+            write(character(Jenis, HP, Attack, Defense, Level, Exp, MaxExp, MaxHP)),write('.'),nl,
+            (onQuest(Quest) ->
+            write(onQuest(Quest)),write('.'),nl;true),
+            posisi(Absis,Ordinat),
+            write(posisi(Absis,Ordinat)),write('.'),nl,
+            chapter(Chapter),
+            write(chapter(Chapter)),write('.'),nl,
+            (daily(Daily) ->
+            write(daily(Daily)),write('.'),nl;true),
+            quest(Slime,Goblin,Wolf,Golem,Wizard),
+            write(quest(Slime,Goblin,Wolf,Golem,Wizard)),write('.'),nl,
+            (currQuest(Slime1,Goblin1,Wolf1,Golem1,Wizard1) ->
+            write(currQuest(Slime1,Goblin1,Wolf1,Golem1,Wizard1)),write('.'),nl;true),
+            (inventory(ID,Pengguna,JenisItem,Nama,HP1,Att,Def) ->
+            write(inventory(ID,Pengguna,JenisItem,Nama,HP1,Att,Def)),write('.'),nl;true),
+            (armor(A)->
+            write(armor(A)),write('.'),nl;true),
+            (senjata(B) ->
+            write(senjata(B)),write('.'),nl;true),
+            wall(C,D,E,F),
+            write(wall(C,D,E,F)),write('.'),nl,
+            dungeon(G,H),
+            write(dungeon(G,H)),write('.'),nl,
+            panjang(I),
+            write(panjang(I)),write('.'),nl,
+            lebar(J),
+            write(lebar(J)),write('.'),nl,
         told, !.
 load.
 loadGame(_) :-

@@ -74,13 +74,13 @@ collect(A,B) :- character(AA,BB,C,D,E,F,G,H), gold(X),
                 retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew)),afterStory5
                 ;A =:= 2, B =:= 1 -> Fnew is F + 100, Xnew is X + 50,
-                retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
+                retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)), retractall(daily(_)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew))
                 ;A =:= 2, B =:= 2 -> Fnew is F + 200, Xnew is X + 100,
-                retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
+                retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),retractall(daily(_)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew))
                 ;A =:= 2, B =:= 3 -> Fnew is F + 300, Xnew is X + 200,
-                retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),
+                retract(character(AA,BB,C,D,E,F,G,H)), retract(gold(X)),retractall(daily(_)),
                 asserta(character(AA,BB,C,D,E,Fnew,G,H)), asserta(gold(Xnew)))
                 ,retractall(onQuest(_)),levelUp.
 
