@@ -60,7 +60,7 @@ daily2 :- write('Karena merasa senasib sepenanggungan, Slime, Goblin, dan Golem'
           write('mendirikan persatuan ras monster tingkat bawah'),nl,
           write('Taklukan 3 Slime, 3 Goblin dan 3 Golem'),nl,
           retractall(daily(_)), asserta(daily(2)),
-          asserta(currQuest(2,2,0,0,0)).
+          asserta(currQuest(3,3,3,0,0)).
 
 
 daily3 :- write('Slime, Goblin, Golem, dan Wolf adalah golongan ras monster pribumi'),nl,
