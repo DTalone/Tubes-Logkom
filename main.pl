@@ -92,7 +92,8 @@ quit :- retract(running(1)),
         retractall(dungeon(_,_)),
         retractall(panjang(_)),
         retractall(lebar(_)),
-        write('Terima kasih telah bermain'),nl.
+        write('Terima kasih telah bermain'),nl,
+        !.
         % sleep(5),
         % halt.
 saveGame(_) :-
@@ -134,8 +135,15 @@ saveGame(FileName) :-
             write(panjang(I)),write('.'),nl,
             lebar(J),
             write(lebar(J)),write('.'),nl,
-        told, !.
-load.
+        told, 
+        write('File telah disimpan dengan nama : '), write(FileName),
+        !.
+
+load :-
+    write('Masukkan nama file: '),
+    read(Filename),
+    loadGame(Filename).    
+
 loadGame(_) :-
 	running(_),
 	write('Kamu sudah memulai permainan.'), nl, !.
