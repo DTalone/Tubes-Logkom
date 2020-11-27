@@ -51,7 +51,7 @@ w :-
     Bnew is B-1,
     asserta(posisi(A,Bnew)),
     asserta(dungeon(1)),
-    write('Anda berada di Dungeon'), bossMode,
+    write('Anda berada di Dungeon'),nl, bossMode,
     !.
 
 w :-
@@ -141,7 +141,7 @@ a :-
     Anew is A-1,
     asserta(posisi(Anew,B)),
     asserta(dungeon(1)),
-    write('Anda berada di Dungeon'),bossMode,
+    write('Anda berada di Dungeon'),nl,bossMode,
     !.
 
 a :-
@@ -231,7 +231,7 @@ s :-
     Bnew is B+1,
     asserta(posisi(A,Bnew)),
     asserta(dungeon(1)),
-    write('Anda berada di Dungeon'),bossMode,
+    write('Anda berada di Dungeon'),nl,bossMode,
     !.
 
 s :-
@@ -321,7 +321,7 @@ d :-
     Anew is A+1,
     asserta(posisi(Anew,B)),
     asserta(inQuest(1)),
-    write('Anda berada di Dungeon'),bossMode,
+    write('Anda berada di Dungeon'),nl,bossMode,
     !.
 
 d :-
@@ -446,7 +446,8 @@ teleport :-
     retract(posisi(_,_)),
     asserta(posisi(TpX,TpY)),
     write('Anda telah diteleport ke koordinat ('), write(TpX), write(','), write(TpY), write(')'),
-    retract(teleport(_)).
+    retract(teleport(_)),
+    !.
 
 cekArea(X,Y) :-
     /* Mengecek posisi X,Y bukan area yang terisi dengan wall, dungeoon, store, quest, border, teleport */

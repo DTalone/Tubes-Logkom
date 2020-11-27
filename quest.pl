@@ -8,6 +8,23 @@ startQuest:- write('\nSelamat datang di Quest\n'),
              (X =:= 1  -> mainQuest
               ;X =:= 2 -> dailyQuest).
 
+quest :-
+    \+(currQuest(_,_,_,_,_)),
+    write('Anda tidak sedang menjalani quest'),
+    !.
+
+quest :-
+    (currQuest(_,_,_,_,_)),
+    currQuest(A,B,C,D,E),
+    quest(F,G,H,I,J),
+    write('Progress Quest: '),nl,
+    write(' Slime ('),write(F),write('/'),write(A),write(')'),nl,
+    write(' Goblin ('),write(G),write('/'),write(B),write(')'),nl,
+    write(' Golem ('),write(H),write('/'),write(C),write(')'),nl,
+    write(' Wolf ('),write(I),write('/'),write(D),write(')'),nl,
+    write(' Wizard ('),write(J),write('/'),write(E),write(')'),nl,
+    !.
+
 mainQuest :-  \+onQuest(_),asserta(onQuest(1)),quest(A,B,C,D,E),
               retractall(quest(A,B,C,D,E)),asserta(quest(0,0,0,0,0)), retractall(currQuest(_,_,_,_,_)),
               chapter(X),

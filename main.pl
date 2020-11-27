@@ -64,10 +64,11 @@ help :- write('Perintah: '), nl,
         write('    map.                : melihat map'),nl,
         write('    w. a. s. d.         : gerak'), nl,
         write('    saveGame            : save game'), nl,
-        write('    cekInventory.       : cek inventory'), nl,
-        write('    delInventory(Nama)  : membuang items dari inventory.'),nl,
       	write('    status.             : cek status character'), nl,
-      	write('    use(NamaEquip).     : memakai/mengganti senjata atau armor'), nl.
+        write('    quest.              : cek progress quest'), nl,
+        write('    cekInventory.       : cek inventory'), nl,
+      	write('    use(NamaEquip).     : memakai/mengganti senjata atau armor'), nl,
+        write('    delInventory(Inv)   : membuang items dari inventory.'),nl.
 quit :-
     \+running(_),
     write('Permainan belum dimulai!'),!.
