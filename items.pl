@@ -57,9 +57,9 @@ addInventory(Nama) :-
 	write('Item berhasil disimpan ke dalam inventory.'),!.
 
 delInventory(Nama) :-
-	\+inventory(_,_,_,Nama,_,_,_),
+	\+inventory(_,_,_,Nama,_,_,_),nl,
 	write('Tidak ada item tersebut di inventory Anda.'),nl,
-	!,fail.
+	!.
 
 delInventory(Nama) :-
 	retract(inventory(_,_,_,Nama,_,_,_)),nl,
