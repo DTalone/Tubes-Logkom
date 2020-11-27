@@ -59,14 +59,12 @@ gacha :-
 	write('Kamu mendapatkan equipment : '),
 	write(Equip),nl,
 	addInventory(Equip),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 gacha :-
 	gold(G),
 	G < 1000,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 health_potion_s :-
@@ -77,14 +75,12 @@ health_potion_s :-
 	asserta(gold(Gnew)),nl,nl,
 	write('Pembelian berhasil'),nl,
 	addInventory(health_potion_s),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 health_potion_s :-
 	gold(G),
 	G < 200,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 health_potion_m :-
@@ -95,14 +91,12 @@ health_potion_m :-
 	asserta(gold(Gnew)),nl,nl,
 	write('Pembelian berhasil'),nl,
 	addInventory(health_potion_m),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 health_potion_m :-
 	gold(G),
 	G < 500,nl,nl,
-	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,	
+	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,	
 	!.
 
 health_potion_l :-
@@ -113,14 +107,12 @@ health_potion_l :-
 	asserta(gold(Gnew)),nl,nl,
 	write('Pembelian berhasil'),nl,
 	addInventory(health_potion_l),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 health_potion_l :-
 	gold(G),
 	G < 1000,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 enhancer_attack :-
@@ -131,14 +123,12 @@ enhancer_attack :-
 	asserta(gold(Gnew)),nl,nl,
 	write('Pembelian berhasil'),nl,
 	addInventory(enhancer_attack),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 enhancer_attack :-
 	gold(G),
 	G < 750,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 enhancer_defense :-
@@ -149,14 +139,12 @@ enhancer_defense :-
 	asserta(gold(Gnew)),nl,nl,
 	write('Pembelian berhasil'),nl,nl,
 	addInventory(enhancer_defense),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 enhancer_defense :-
 	gold(G),
 	G < 750,nl,nl,
 	write('Pembelian tidak berhasil, gold tidak cukup.'),nl,nl,
-	write('Masukkan \'exitStore.\' untuk keluar dari store.'),nl,
 	!.
 
 exitStore :-
