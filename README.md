@@ -4,14 +4,15 @@ A Programmer Is Born In New Isekai (Genshin Sekai)
 
 Disusun oleh Grup 11 Kelas 01 :
   - 13519009	M. Fatchur Rochman
-  - 13519021  	Arjuna Marcelino 
-  - 13519065  	Faris Aziz 
+  - 13519021  	Arjuna Marcelino
+  - 13519065  	Faris Aziz
   - 13519113	Raihan Astrada Fathurrahman
 
 **SPESIFIKASI LINGKUNGAN**
 1. GNU Prolog, Anda dapat mengunduhnya [disini](http://www.gprolog.org/#download)
 2. Operating System : Windows 7, Windows 8, Windows 10 (rekomendasi), MAC OS, Linux
 3. RAM : 2GB minimum, 4GB (rekomendasi)
+4. MinGW, Anda dapat mengunduhnya [disini](https://osdn.net/projects/mingw/releases/)
 
 
 **CARA MENJALANKAN**
