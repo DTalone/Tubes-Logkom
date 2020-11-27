@@ -193,7 +193,9 @@ cekInventory :-
 
 cekInventory :-
 	running(_),nl,
-	write('Inventory Pemain :'),nl,
+	write('##########################################'),nl,
+	write('#            INVENTORY PEMAIN            #'),nl,
+	write('##########################################'),nl,
 	findall(Nama,inventory(_,_,_,Nama,_,_,_),List),
 	print_list(List),
 	!.

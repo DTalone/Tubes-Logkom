@@ -36,7 +36,8 @@ store :-
 	write('# 7. Keluar                                 #'),nl,
 	write('#                                           #'),nl,
 	write('# Apa yang ingin Anda beli?                 #'),nl,
-	write('##################  STORE  ##################'),nl,nl,
+	write('#                                           #'),nl,
+	write('#############################################'),nl,nl,
 	write('Masukkan angka : '),read(X),
        	(X =:= 1 -> gacha
         ;X =:= 2 -> health_potion_s

@@ -24,6 +24,9 @@ levelUp :- character(A,B,C,D,E,F,G,H), F >= G,
 levelUp :-!.
 
 status :- character(A,B,C,D,E,F,G,H),gold(Gold),\+senjata(_),\+armor(_),
+	  write('###########################################'),nl,
+	  write('#              STATUS PEMAIN              #'),nl,
+	  write('###########################################'),nl,
           write('Job      : '), write(A),nl,
           write('HP       : '), write(B),write('/'),write(H),nl,
           write('Attack   : '), write(C),nl,
@@ -33,6 +36,9 @@ status :- character(A,B,C,D,E,F,G,H),gold(Gold),\+senjata(_),\+armor(_),
           write('Gold     : '), write(Gold),nl,!.
 
 status :- character(A,B,C,D,E,F,G,H),gold(Gold),senjata(Senjata),\+armor(_),
+	  write('###########################################'),nl,
+	  write('#              STATUS PEMAIN              #'),nl,
+	  write('###########################################'),nl,
           write('Job      : '), write(A),nl,
           write('HP       : '), write(B),write('/'),write(H),nl,
           write('Attack   : '), write(C),nl,
@@ -43,6 +49,9 @@ status :- character(A,B,C,D,E,F,G,H),gold(Gold),senjata(Senjata),\+armor(_),
 	  write('Senjata  : '), write(Senjata),nl,!.
 
 status :- character(A,B,C,D,E,F,G,H),gold(Gold),\+senjata(_),armor(Armor),
+	  write('###########################################'),nl,
+	  write('#              STATUS PEMAIN              #'),nl,
+	  write('###########################################'),nl,
           write('Job      : '), write(A),nl,
           write('HP       : '), write(B),write('/'),write(H),nl,
           write('Attack   : '), write(C),nl,
@@ -53,6 +62,9 @@ status :- character(A,B,C,D,E,F,G,H),gold(Gold),\+senjata(_),armor(Armor),
 	  write('Armor    : '), write(Armor),nl,!.
 
 status :- character(A,B,C,D,E,F,G,H),gold(Gold),senjata(Senjata),armor(Armor),
+	  write('###########################################'),nl,
+	  write('#              STATUS PEMAIN              #'),nl,
+	  write('###########################################'),nl,
           write('Job      : '), write(A),nl,
           write('HP       : '), write(B),write('/'),write(H),nl,
           write('Attack   : '), write(C),nl,
