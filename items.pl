@@ -1,10 +1,11 @@
 /* File : items.pl */
 /* item(ID,Pengguna,Jenis,Nama,HP,Att,Def) */
 
-:- dynamic(inventory/7).
-:- dynamic(senjata/1).
-:- dynamic(armor/1).
+:- dynamic(inventory/7). /* menyimpan items pemain */
+:- dynamic(senjata/1). /* menyimpan senjata yang dipakai */
+:- dynamic(armor/1). /* menyimpan armor yang dipakai */
 
+/* inventory maksimal berisi 100 items */
 maxInventory(100).
 
 /* Kategori 1 Senjata */
@@ -36,14 +37,11 @@ item(21,archer,potion,enhancer_defense,0,0,30).
 item(22,swordsman,potion,enhancer_defense,0,0,30).
 item(23,sorcerer,potion,enhancer_defense,0,0,30).
 
-
+/* mengecek jumlah isi inventory */	
 cekIsi(Length) :-
     	length(inventory,Length).
 
-isFull :-
-    	cekIsi(Length),
-    	Length == 100.
-
+/* gagal disimpan karena inventory penuh */
 addInventory(_) :-
 	cekIsi(Length),
 	maxInventory(Max),
@@ -51,17 +49,20 @@ addInventory(_) :-
 	write('Inventory sudah penuh.'),
 	!,fail.
 
+/* berhasil simpan ke dalam inventory */
 addInventory(Nama) :-
 	item(ID,Pengguna,Jenis,Nama,HP,Att,Def),
 	asserta(inventory(ID,Pengguna,Jenis,Nama,HP,Att,Def)),nl,
 	write('Item berhasil disimpan ke dalam inventory.'),!.
 
+/* gagal hapus item karena tidak dimiliki */
 delInventory(Nama) :-
 	running(_),
 	\+inventory(_,_,_,Nama,_,_,_),nl,
 	write('Tidak ada item tersebut di inventory Anda.'),nl,
 	!.
 
+/* hapus items */
 delInventory(Nama) :-
 	running(_),
 	retract(inventory(_,_,_,Nama,_,_,_)),nl,
@@ -69,6 +70,7 @@ delInventory(Nama) :-
 	write(' berhasil dihapus dari inventory.'),nl,
 	!.
 
+/* menggunakan/menggantikan senjata atau armor yang dimiliki */
 use(Nama) :-
 	running(_),
 	\+inventory(_,_,_,Nama,_,_,_),nl,
@@ -157,6 +159,7 @@ use(Nama) :-
 	write('Berhasil mengganti armor'),nl,
 	!.
 
+/* menggunakan potion yang dimiliki */
 usePotions(Nama) :-
 	\+inventory(_,_,_,Nama,_,_,_),
 	write('Tidak ada item tersebut di inventory Anda.'),
@@ -188,11 +191,13 @@ usePotions(Nama) :-
 	write('Potion berhasil dipakai.'),nl,
 	!.
 
+/* buat print isi list */
 print_list([]).
 print_list([A|B]) :-
   	write(A),nl,
   	print_list(B).
 
+/* menampilkan isi inventory */
 cekInventory :-
 	running(_),
 	\+inventory(_,_,_,_,_,_,_),nl,
@@ -208,6 +213,7 @@ cekInventory :-
 	print_list(List),
 	!.
 
+/* menampilkan potions yang dimiliki */
 cekPotions :-
 	running(_),nl,
 	\+inventory(_,_,'potion',_,_,_,_),
