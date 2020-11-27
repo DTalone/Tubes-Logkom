@@ -24,7 +24,8 @@ w :-
     posisi(A,B),
     isStore(A,B-1),
     retract(posisi(A,B)),
-    asserta(posisi(A,B-1)),
+    Bnew is B-1,
+    asserta(posisi(A,Bnew)),
     asserta(inStore(1)),
     write('Anda berada di Store'),nl,
     write('Masukkan \'store.\' untuk melihat menu dan melakukan pembelian.'),nl,
@@ -36,7 +37,8 @@ w :-
     posisi(A,B),
     isQuest(A,B-1),
     retract(posisi(A,B)),
-    asserta(posisi(A,B-1)),
+    Bnew is B-1,
+    asserta(posisi(A,Bnew)),
     write('Anda berada di Quest'),startQuest,
     !.
 
@@ -46,7 +48,8 @@ w :-
     posisi(A,B),
     isDungeon(A,B-1),
     retract(posisi(A,B)),
-    asserta(posisi(A,B-1)),
+    Bnew is B-1,
+    asserta(posisi(A,Bnew)),
     asserta(dungeon(1)),
     write('Anda berada di Dungeon'), bossMode,
     !.
@@ -57,9 +60,11 @@ w :-
     posisi(A,B),
     isTeleport(A,B-1),
     retract(posisi(A,B)),
-    asserta(posisi(A,B-1)),
+    Bnew is B-1,
+    asserta(posisi(A,Bnew)),
     asserta(teleport(1)),
-    write('Anda berada di Teleport'),
+    write('Anda berada di Teleport'),nl,
+    write('Masukkan \'teleport.\' untuk menggunakan teleport.'),nl,
     !.
 
 w :-
@@ -71,7 +76,8 @@ w :-
     retractall(dungeon(_)),
     retractall(teleport(_)),
     retract(posisi(A,B)),
-    asserta(posisi(A,B-1)),
+    Bnew is B-1,
+    asserta(posisi(A,Bnew)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke utara.'),nl),
     !.
 
@@ -81,7 +87,8 @@ w :-
     posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
-    asserta(posisi(A,B-1)),
+    Bnew is B-1,
+    asserta(posisi(A,Bnew)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke utara.'),nl),
     !.
 
@@ -107,7 +114,8 @@ a :-
     posisi(A,B),
     isStore(A-1,B),
     retract(posisi(A,B)),
-    asserta(posisi(A-1,B)),
+    Anew is A-1,
+    asserta(posisi(Anew,B)),
     asserta(inStore(1)),
     write('Anda berada di Store'),nl,
     write('Masukkan \'store.\' untuk melihat menu dan melakukan pembelian.'),nl,
@@ -119,7 +127,8 @@ a :-
     posisi(A,B),
     isQuest(A-1,B),
     retract(posisi(A,B)),
-    asserta(posisi(A-1,B)),
+    Anew is A-1,
+    asserta(posisi(Anew,B)),
     write('Anda berada di Quest'),startQuest,
     !.
 
@@ -129,7 +138,8 @@ a :-
     posisi(A,B),
     isDungeon(A-1,B),
     retract(posisi(A,B)),
-    asserta(posisi(A-1,B)),
+    Anew is A-1,
+    asserta(posisi(Anew,B)),
     asserta(dungeon(1)),
     write('Anda berada di Dungeon'),bossMode,
     !.
@@ -140,9 +150,11 @@ a :-
     posisi(A,B),
     isTeleport(A-1,B),
     retract(posisi(A,B)),
-    asserta(posisi(A-1,B)),
+    Anew is A-1,
+    asserta(posisi(Anew,B)),
     asserta(teleport(1)),
-    write('Anda berada di Teleport'),
+    write('Anda berada di Teleport'),nl,
+    write('Masukkan \'teleport.\' untuk menggunakan teleport.'),nl,
     !.
 
 a :-
@@ -154,7 +166,8 @@ a :-
     retractall(dungeon(_)),
     retractall(teleport(_)),
     retract(posisi(A,B)),
-    asserta(posisi(A-1,B)),
+    Anew is A-1,
+    asserta(posisi(Anew,B)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke barat.'),nl),
     !.
 
@@ -164,7 +177,8 @@ a :-
     posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
-    asserta(posisi(A-1,B)),
+    Anew is A-1,
+    asserta(posisi(Anew,B)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke barat.'),nl),
     !.
 
@@ -190,7 +204,8 @@ s :-
     posisi(A,B),
     isStore(A,B+1),
     retract(posisi(A,B)),
-    asserta(posisi(A,B+1)),
+    Bnew is B+1,
+    asserta(posisi(A,Bnew)),
     asserta(inStore(1)),
     write('Anda berada di Store'),nl,
     write('Masukkan \'store.\' untuk melihat menu dan melakukan pembelian.'),nl,
@@ -202,7 +217,8 @@ s :-
     posisi(A,B),
     isQuest(A,B+1),
     retract(posisi(A,B)),
-    asserta(posisi(A,B+1)),
+    Bnew is B+1,
+    asserta(posisi(A,Bnew)),
     write('Anda berada di Quest'),startQuest,
     !.
 
@@ -212,7 +228,8 @@ s :-
     posisi(A,B),
     isDungeon(A,B+1),
     retract(posisi(A,B)),
-    asserta(posisi(A,B+1)),
+    Bnew is B+1,
+    asserta(posisi(A,Bnew)),
     asserta(dungeon(1)),
     write('Anda berada di Dungeon'),bossMode,
     !.
@@ -223,9 +240,11 @@ s :-
     posisi(A,B),
     isTeleport(A,B+1),
     retract(posisi(A,B)),
-    asserta(posisi(A,B+1)),
+    Bnew is B+1,
+    asserta(posisi(A,Bnew)),
     asserta(teleport(1)),
-    write('Anda berada di Teleport'),
+    write('Anda berada di Teleport'),nl,
+    write('Masukkan \'teleport.\' untuk menggunakan teleport.'),nl,
     !.
 
 s :-
@@ -237,7 +256,8 @@ s :-
     retractall(dungeon(_)),
     retractall(teleport(_)),
     retract(posisi(A,B)),
-    asserta(posisi(A,B+1)),
+    Bnew is B+1,
+    asserta(posisi(A,Bnew)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke selatan.'),nl),
     !.
 
@@ -247,7 +267,8 @@ s :-
     posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
-    asserta(posisi(A,B+1)),
+    Bnew is B+1,
+    asserta(posisi(A,Bnew)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke selatan.'),nl),
     !.
 
@@ -273,7 +294,8 @@ d :-
     posisi(A,B),
     isStore(A+1,B),
     retract(posisi(A,B)),
-    asserta(posisi(A+1,B)),
+    Anew is A+1,
+    asserta(posisi(Anew,B)),
     asserta(inStore(1)),
     write('Anda berada di Store'),nl,
     write('Masukkan \'store.\' untuk melihat menu dan melakukan pembelian.'),nl,
@@ -285,7 +307,8 @@ d :-
     posisi(A,B),
     isQuest(A+1,B),
     retract(posisi(A,B)),
-    asserta(posisi(A+1,B)),
+    Anew is A+1,
+    asserta(posisi(Anew,B)),
     write('Anda berada di Quest'),startQuest,
     !.
 
@@ -295,7 +318,8 @@ d :-
     posisi(A,B),
     isDungeon(A+1,B),
     retract(posisi(A,B)),
-    asserta(posisi(A+1,B)),
+    Anew is A+1,
+    asserta(posisi(Anew,B)),
     asserta(inQuest(1)),
     write('Anda berada di Dungeon'),bossMode,
     !.
@@ -306,9 +330,11 @@ d :-
     posisi(A,B),
     isTeleport(A+1,B),
     retract(posisi(A,B)),
-    asserta(posisi(A+1,B)),
+    Anew is A+1,
+    asserta(posisi(Anew,B)),
     asserta(teleport(1)),
-    write('Anda berada di Teleport'),
+    write('Anda berada di Teleport'),nl,
+    write('Masukkan \'teleport.\' untuk menggunakan teleport.'),nl,
     !.
 
 d :-
@@ -320,7 +346,8 @@ d :-
     retractall(dungeon(_)),
     retractall(teleport(_)),
     retract(posisi(A,B)),
-    asserta(posisi(A+1,B)),
+    Anew is A+1,
+    asserta(posisi(Anew,B)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke timur.'),nl),
     !.
 
@@ -330,7 +357,8 @@ d :-
     posisi(A,B),
     cekArea(A,B),
     retract(posisi(A,B)),
-    asserta(posisi(A+1,B)),
+    Anew is A+1,
+    asserta(posisi(Anew,B)),
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke timur.'),nl),
     !.
 
@@ -346,12 +374,13 @@ randomEncounter :-
     ).
 
 randomEnemy(_,X) :-
+    /* Cek Koordinat Y Player */
     (
         X < 5 ->
-        random(1,3,EnemyID) % Di 1 <= Y <=4 awal bisa lawan Slime / Goblin
+        random(1,3,EnemyID) % Di 1 <= Y <=4 bisa lawan Slime / Goblin
     ;   X < 8 ->
-        random(3,5,EnemyID) % Di 5 <= Y <=7 awal bisa lawan Wolf / Golem
-    ;   EnemyID is 5 % Di Y > 7 awal bisa lawan Wizard
+        random(3,5,EnemyID) % Di 5 <= Y <=7 bisa lawan Wolf / Golem
+    ;   EnemyID is 5 % Di Y > 7 bisa lawan Wizard
     ),
     quest(A,B,C,D,E),
     (
@@ -360,7 +389,7 @@ randomEnemy(_,X) :-
         battle(slime),
         (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over'), quit
+        ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest)
     ;   EnemyID =:= 2 ->
@@ -368,7 +397,7 @@ randomEnemy(_,X) :-
         battle(goblin),
         (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over'), quit
+        ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest)
     ;   EnemyID =:= 3 ->
@@ -376,7 +405,7 @@ randomEnemy(_,X) :-
         battle(wolf),
         (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over'), quit
+        ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 4 ->
@@ -384,7 +413,7 @@ randomEnemy(_,X) :-
         battle(golem),
         (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over'), quit
+        ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 5 ->
@@ -392,7 +421,7 @@ randomEnemy(_,X) :-
         battle(wizard),
         (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retractall(victory),cekQuest
         ;kabur -> retractall(kabur)
-        ;gameOver -> write('Game Over'), quit
+        ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
         % (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest)
     ).
