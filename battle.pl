@@ -13,9 +13,14 @@ battle(A) :- adjusmentEnemy(A),
           (kabur -> true
           ;gameOver -> true
           ;victory -> character(S,T,U,V,W,X,Y,Z),
+          gold(G),
           Xnew is X + E * 100,
+          Gnew is G + 30,
           retract(character(S,T,U,V,W,X,Y,Z)),
-          asserta(character(S,T,U,V,W,Xnew,Y,Z))),levelUp,!.
+          retract(gold(G)),
+          asserta(character(S,T,U,V,W,Xnew,Y,Z))),
+          asserta(gold(Gnew)),
+          levelUp,!.
 
 bossMode:-write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalanan Anda!\n'),
           enemy('rajagledek',B,C,D,E),
