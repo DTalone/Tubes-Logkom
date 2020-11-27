@@ -3,8 +3,9 @@
 :- dynamic(wall/4).
 :- dynamic(dungeon/2).
 
+/* Menginisialisasi Map */
 initMap:-
-    asserta(panjang(11)), 
+    asserta(panjang(11)),
     asserta(lebar(11)),
     panjang(P),
     lebar(L),
@@ -14,31 +15,38 @@ initMap:-
     randomizeWall,
     initPlayer.
 
+/* Menginisialisasi Posisi Awal Player */
 initPlayer :-
     asserta(posisi(1,1)).
 
+/* Mengecek apakah kooordinat X,Y posisi Player */
 isPlayer(X,Y) :-
     posisi(A,B),
     X =:= A,
     Y =:= B.
 
+/* Mengecek apakah kooordinat X,Y posisi Store */
 isStore(X,Y) :-
     X =:= 2,
     Y =:= 2.
 
+/* Mengecek apakah kooordinat X,Y posisi Quest */
 isQuest(X,Y) :-
     X =:= 7,
     Y =:= 3.
 
+/* Mengecek apakah kooordinat X,Y posisi Dungeon */
 isDungeon(X,Y) :-
     dungeon(A,B),
     X =:= A,
     Y =:= B.
 
+/* Mengecek apakah kooordinat X,Y posisi Teleport */
 isTeleport(X,Y) :-
     X =:= 4,
     Y =:= 8.
 
+/* Mengecek apakah kooordinat X,Y posisi Wall yg di generate */
 isWall(X1,Y1,_,_) :-
     wall(WX1, WY1, _, _),
     WX1 =:= X1,
@@ -48,7 +56,8 @@ isWall(_,_,X2,Y2) :-
     wall(_, _, WX2, WY2),
     WX2 =:= X2,
     WY2 =:= Y2.
-    
+
+/* Mengecek apakah kooordinat X,Y posisi Border atau Ujung Map */
 isBorder(X,_) :-
     X =:= 0.
 isBorder(X,_) :-
@@ -60,6 +69,7 @@ isBorder(_,Y) :-
     lebar(L),
     Y =:= L.
 
+/* Men-generate wall tambahan dengan posisi di range [4,8) */
 randomizeWall :-
     lebar(L),
     panjang(P),
@@ -71,6 +81,7 @@ randomizeWall :-
     random(4,L1,WY2),
     asserta(wall(WX1, WY1, WX2, WY2)).
 
+/* Menampilkan info yang terdapat pada kordinat X,Y */
 printMap(X,Y) :-
     panjang(P),
     lebar(L),
@@ -136,6 +147,7 @@ printMap(X,Y) :-
     NextX is (X+1),
     printMap(NextX,Y).
 
+/* Menampilkan Map */
 map :- 
     running(_),
     printMap(0,0),!.

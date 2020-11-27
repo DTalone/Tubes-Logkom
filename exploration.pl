@@ -2,6 +2,7 @@
 :- dynamic(teleport/1).
 :- dynamic(dungeon/1).
 
+/* Gerak ke Utara */
 w :-
     running(_),
     \+round(_),
@@ -92,6 +93,7 @@ w :-
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke utara.'),nl),
     !.
 
+/* Gerak ke Barat */
 a :-
     running(_),
     \+round(_),
@@ -182,6 +184,7 @@ a :-
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke barat.'),nl),
     !.
 
+/* Gerak ke Selatan */
 s :-
     running(_),
     \+round(_),
@@ -272,6 +275,7 @@ s :-
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke selatan.'),nl),
     !.
 
+/* Gerak ke Timur */
 d :-
     running(_),
     \+round(_),
@@ -362,6 +366,7 @@ d :-
     (randomEncounter -> write(''); write('Anda berpindah 1 kotak ke timur.'),nl),
     !.
 
+/* Kemungkinan bertemu musuh */
 randomEncounter :-
     running(_),
     \+round(_),
@@ -373,6 +378,7 @@ randomEncounter :-
 
     ).
 
+/* Randomize musuh berdasarkan Area */
 randomEnemy(_,X) :-
     /* Cek Koordinat Y Player */
     (
@@ -391,7 +397,6 @@ randomEnemy(_,X) :-
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
-        % (victory -> Anew is A + 1 , retract(quest(A,B,C,D,E)),asserta(quest(Anew,B,C,D,E)), retractall(victory),cekQuest)
     ;   EnemyID =:= 2 ->
         write('Anda menemukan Goblin!'),nl,
         battle(goblin),
@@ -399,7 +404,6 @@ randomEnemy(_,X) :-
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
-        % (victory -> Bnew is B + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,Bnew,C,D,E)), retractall(victory),cekQuest)
     ;   EnemyID =:= 3 ->
         write('Anda menemukan Wolf!'),nl,
         battle(wolf),
@@ -407,7 +411,6 @@ randomEnemy(_,X) :-
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
-        % (victory -> Cnew is C + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,Cnew,D,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 4 ->
         write('Anda menemukan Golem!'),nl,
         battle(golem),
@@ -415,7 +418,6 @@ randomEnemy(_,X) :-
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
-        % (victory -> Dnew is D + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,Dnew,E)), retract(victory),cekQuest)
     ;   EnemyID =:= 5 ->
         write('Anda menemukan Wizard!'),nl,
         battle(wizard),
@@ -423,9 +425,9 @@ randomEnemy(_,X) :-
         ;kabur -> retractall(kabur)
         ;gameOver -> write('Game Over'),nl, quit
         ;retract(running(1)),retractall(round(_)),start)
-        % (victory -> Enew is E + 1 , retract(quest(A,B,C,D,E)), asserta(quest(A,B,C,D,Enew)), retract(victory),cekQuest)
     ).
 
+/* Teleport */
 teleport :-
     running(_),
     \+teleport(_),
@@ -449,8 +451,8 @@ teleport :-
     retract(teleport(_)),
     !.
 
+/* Mengecek posisi X,Y bukan area yang terisi dengan wall, dungeoon, store, quest, border, teleport */
 cekArea(X,Y) :-
-    /* Mengecek posisi X,Y bukan area yang terisi dengan wall, dungeoon, store, quest, border, teleport */
     \+isWall(X,Y,X,Y),
     \+isDungeon(X,Y),
     \+isTeleport(X,Y),
