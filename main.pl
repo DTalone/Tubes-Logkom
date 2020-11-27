@@ -31,13 +31,14 @@ start :-
     write( '_|        _|    _|  _|        _|  _|        _|        _|    _|  _|      _|'),nl,
     write( '_|_|_|_|    _|_|      _|_|_|  _|    _|        _|_|_|    _|_|    _|      _|'),nl,
     nl,
+    asserta(quest(0,0,0,0,0)),
+    repeat,
     write('Selamat datang pemuda pencari tujuan hidup'),nl,
     write('1. New Game.'),nl,
     write('2. Load Game.'),nl,
     write('Masukkan angka : '),read(X),
-    asserta(quest(0,0,0,0,0)),
     (X =:= 1 -> newGame
-    ;X =:= 2 -> load),
+    ;X =:= 2 -> loadGame),
     asserta(running(1)),
     write('\nuntuk melihat perintah apa saja yang dapat digunakan silahkan mengetik \'help.\''),!.
 
@@ -49,6 +50,7 @@ newGame:- write('Siapakah nama kamu? (tulis di antara tanda petik dan diakhiri t
           write('Halo '), write(Username),write('! Selamat Bermain.'),nl,nl,
           asserta(running(1)),
           asserta(chapter(0)),
+          asserta(gold(1000)),
           initChar,
           initEnemy,
           initMap,
@@ -96,12 +98,13 @@ quit :- retract(running(1)),
         !.
         % sleep(5),
         % halt.
-saveGame(_) :-
+saveGame :-
 	\+running(_),
 	write('Perintah ini hanya bisa dipakai setelah pemainan dimulai.'), nl,
 	write('Gunakan perintah "start." untuk memulai permainan.'), nl, !.
 
-saveGame(FileName) :-
+saveGame :-
+        write('Masukkan nama file : '),read(FileName),
         tell(FileName),
             nama(Username),
             write(nama(Username)),write('.'),nl,
@@ -135,29 +138,23 @@ saveGame(FileName) :-
             write(panjang(I)),write('.'),nl,
             lebar(J),
             write(lebar(J)),write('.'),nl,
-        told, 
+        told,
         write('File telah disimpan dengan nama : '), write(FileName),
         !.
 
-load :-
-    write('Masukkan nama file: '),
-    read(Filename),
-    loadGame(Filename).    
-
-loadGame(_) :-
+loadGame :-
 	running(_),
 	write('Kamu sudah memulai permainan.'), nl, !.
 
-loadGame(FileName):-
-	\+file_exists(FileName),
-	write('File tidak ditemukan'), nl, write('Silahkan tulis ulang nama file.'), nl, !.
-
-loadGame(FileName):-
-	open(FileName, read, Stream),
+loadGame:-
+  write('Masukkan nama file : '), read(FileName),
+  (\+file_exists(FileName) -> write('\n!File tidak ditemukan!\n'), nl, !,fail
+  ;open(FileName, read, Stream),
         readFileLines(Stream,Lines),
     close(Stream),
     assertaLine(Lines),
-    asserta(running(1)), !.
+    asserta(running(1))), write('\nFile berhasil di-load!\n'),!.
+
 assertaLine([]) :- !.
 
 assertaLine([X|L]):-
