@@ -2,6 +2,7 @@
 :- dynamic(kabur/0).  %tanda jika berhasil kabur
 :- dynamic(currEnemy/6). %menyimpan enemy sekarang
 
+% Battle Enemy
 battle(A) :- adjusmentEnemy(A),
           enemy(A,B,C,D,E),
           asserta(round(1)),
@@ -21,7 +22,7 @@ battle(A) :- adjusmentEnemy(A),
           asserta(character(S,T,U,V,W,Xnew,Y,Z))),
           asserta(gold(Gnew)),
           levelUp,!.
-
+% Bagian Lawan boss
 bossMode:- \+onQuest(_), chapter(X), X =:= 5, write('Selamat Datang di Boss Mode, Ini merupakan akhir dari perjalanan Anda!\n'),
           enemy('rajagledek',B,C,D,E),
           asserta(round(1)),
@@ -37,6 +38,7 @@ bossMode:- \+onQuest(_), chapter(X), X =:= 5, write('Selamat Datang di Boss Mode
 
 bossMode:- chapter(X), X < 5, write('\nAnda belum bisa melawan Boss!\n'),!.
 
+%bagian giliran serang
 fight :-  repeat,
           turnUser,
           currEnemy(_,W,_,_,_,_),
@@ -44,7 +46,7 @@ fight :-  repeat,
           kabur -> !;
           turnEnemy, character(_,X,_,_,_,_,_,_),(endCondition(X,1) -> write('Kamu kalah'),nl,asserta(gameOver),!;
                                                                       round(Round), Roundnew is Round + 1, retract(round(Round)), asserta(round(Roundnew)),fight)).
-
+%bagian giliran pengguna
 turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
             write('1. Attack.'),nl,
             write('2. Special Attack.'),nl,
@@ -59,7 +61,7 @@ turnUser :- write('Apa yang akan Anda lakukan ?'),nl,
               write('################################'),nl,
               write('#     Anda berhasil kabur!     #\n'),
               write('################################'),nl,!;printStat).
-
+%bagian giliran enemy
 turnEnemy :- character(A,B,C,D,E,F,G,H),
             currEnemy(_,_,K,_,_,_),
             Bnew is B - K + D,
@@ -72,7 +74,7 @@ turnEnemy :- character(A,B,C,D,E,F,G,H),
             write('##########Giliran Musuh!##########'),nl,
             write('#    Awwww sakit banget broo!    #\n'),
             write('##################################'),nl,nl, printStat, nl.
-
+%print status pertarungan
 printStat :- character(A,B,_,_,_,_,_,H),currEnemy(I,J,_,_,_,K), round(Round), B < 0,
           write('Giliran ke-'),write(Round),nl,
           write('Job      : '), write(A),write('           '),write('Type       : '), write(I),nl,
@@ -87,6 +89,7 @@ printStat :- character(A,B,_,_,_,_,_,H),currEnemy(I,J,_,_,_,K), round(Round),
           write('Giliran ke-'),write(Round),nl,
           write('Job      : '), write(A),write('           '),write('Type       : '), write(I),nl,
           write('HP       : '), write(B),write('/'),write(H),write('          '),write('HP       : '), write(J),write('/'),write(K),nl,!.
+% attack
 attack :- character(_,_,X,_,_,_,_,_),
           currEnemy(A,B,C,D,E,F),
           Bnew is B - X + D, Bnew < B,
@@ -103,6 +106,7 @@ attack :- character(_,_,X,_,_,_,_,_),
           write('##########Giliran Anda!!##########'),nl,
           write('#    Damagenya ga nahan broo!    #\n'),
           write('##################################'),nl,nl.
+%special Attack
 specialAttack :- character(_,_,Y,_,_,_,_,_),round(X),Z is X mod 3,
                 (Z =:= 0-> nl,
                   write('##########Giliran Anda!!##########'),nl,
@@ -111,10 +115,10 @@ specialAttack :- character(_,_,Y,_,_,_,_,_),round(X),Z is X mod 3,
                   Bnew is B - 2 * Y,retract(currEnemy(A,B,C,D,E,F)),asserta(currEnemy(A,Bnew,C,D,E,F)),nl;
                   write('Serangan ini tidak bisa digunakan!\n'),fail).
 
-
+%apabila darah musuh atau darah pengguna kurang dari 0
 endCondition(X,Y):- Y = 1,   X < 1, nl,!.
 endCondition(X,Y):- Y = 2,  X < 1 , nl,!.
 
-
+% kabur dari pertarungan
 run :- running(_), round(_), random(1,100,X),  retractall(kabur),nl,
     ( X < 25 -> asserta(kabur),!;write('Anda tidak berhasil kabur!\n')).
